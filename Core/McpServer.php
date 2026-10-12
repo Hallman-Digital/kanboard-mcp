@@ -159,6 +159,25 @@ class McpServer extends Base
 
         $tools = [
             [
+                'name' => 'get_custom_css',
+                'description' => 'Get the active Customizer theme CSS and current theme selection',
+                'inputSchema' => [
+                    'type' => 'object',
+                    'additionalProperties' => false,
+                ],
+            ],
+            [
+                'name' => 'set_custom_css',
+                'description' => 'Set the Hallman Customizer CSS theme and activate it globally',
+                'inputSchema' => [
+                    'type' => 'object',
+                    'properties' => [
+                        'css' => ['type' => 'string', 'description' => 'Complete CSS stylesheet to save as the Hallman theme'],
+                    ],
+                    'required' => ['css'],
+                ],
+            ],
+            [
                 'name' => 'get_projects',
                 'description' => 'Get all projects',
                 'inputSchema' => [
@@ -692,25 +711,7 @@ class McpServer extends Base
                     'required' => ['subtask_id', 'confirm'],
                 ],
             ],
-            [
-                'name' => 'get_custom_css',
-                'description' => 'Get the active Customizer theme CSS and current theme selection',
-                'inputSchema' => [
-                    'type' => 'object',
-                    'additionalProperties' => false,
-                ],
-            ],
-            [
-                'name' => 'set_custom_css',
-                'description' => 'Set the Hallman Customizer CSS theme and activate it globally',
-                'inputSchema' => [
-                    'type' => 'object',
-                    'properties' => [
-                        'css' => ['type' => 'string', 'description' => 'Complete CSS stylesheet to save as the Hallman theme'],
-                    ],
-                    'required' => ['css'],
-                ],
-            ],
+
         ]);
 
         return [
