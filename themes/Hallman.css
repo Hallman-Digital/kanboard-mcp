@@ -1,324 +1,235 @@
 /*
- * Hallman.Digital Kanboard theme
- * Source of truth: Hallman-Digital/kanboard-mcp/themes/Hallman.css
- * Version: 0.2.0 | 2026-10-12
- * Customizer > Manage Themes > Upload a theme
- * IBM Plex typography; balanced charcoal surfaces; accessible navigation and readable cards.
- * No external logo URLs or browser-specific hacks.
- */
+ Hallman.Digital Kanboard — Higher Contrast / Comfortable
+ Development stylesheet v0.3.0 (2026-10-12)
+ Source of truth: Hallman-Digital/kanboard-mcp/themes/Hallman.css
+ Paste into Settings > Application settings > Custom Stylesheet.
+ Set Customizer global theme to Default during development.
+ Sidebar: styles the existing sidebar; CSS cannot create a true global
+ project navigation or inject project links. No dummy navigation.
+*/
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
-
 :root {
-  --h-bg: #0e151b;
-  --h-surface: #17222b;
-  --h-surface-raised: #1e2d38;
-  --h-card: #233541;
-  --h-border: #354b59;
-  --h-text: #eef4f7;
-  --h-muted: #b9cbd4;
-  --h-blue: #45adf5;
-  --h-orange: #ff8a47;
-  --h-green: #5bd5ad;
-  --h-red: #f48b8b;
+  --hd-bg: #18232d;
+  --hd-header: #111c26;
+  --hd-nav: #1c2b37;
+  --hd-panel: #273b49;
+  --hd-panel-light: #354d5c;
+  --hd-card: #9db4c4;
+  --hd-card-hover: #b0c5d2;
+  --hd-card-text: #112533;
+  --hd-stroke: #4a6373;
+  --hd-ink: #f3f8fb;
+  --hd-muted: #c9d9e3;
+  --hd-link: #75caff;
+  --hd-blue: #4fbcff;
+  --hd-orange: #ff9b59;
+  --hd-red: #fb7476;
+  --hd-green: #60cf99;
+  --hd-radius: 7px;
 }
-html, body {
-  background: var(--h-bg) !important;
-  color: var(--h-text);
-  font-family: 'IBM Plex Sans', sans-serif;
-  font-size: 14px;
-}
-body, button, input, select, textarea, .dropdown-menu, .task-board {
-  font-family: 'IBM Plex Sans', sans-serif;
-}
-code, pre, kbd, .task-id, .task-board-reference, .task-board-age {
-  font-family: 'IBM Plex Mono', monospace;
-}
-/* Header: a matching dark background prevents white-on-white navigation */
+html, body { background: var(--hd-bg) !important; color: var(--hd-ink) !important; font: 15px/1.45 'IBM Plex Sans', sans-serif !important; }
+body, input, select, button, textarea, label, .task-board, .dropdown-menu { font-family: 'IBM Plex Sans', sans-serif !important; }
+code, pre, kbd, .task-id, .task-board-reference { font-family: 'IBM Plex Mono', monospace !important; }
+a, a:visited { color: var(--hd-link); }
+a:hover { color: #b5e6ff; }
+h1,h2,h3,h4,h5,h6 { color: var(--hd-ink); font-weight: 600; }
+small, .color-grey, .text-muted { color: var(--hd-muted) !important; }
+hr { border-color: var(--hd-stroke); }
+
+/* Header: repair the contrast of all links and the project title. */
 body > header, header, .header, .page-header, .project-header {
-  background: var(--h-surface) !important;
-  color: var(--h-text) !important;
-  border-color: var(--h-border) !important;
+  background: var(--hd-header) !important;
+  color: var(--hd-ink) !important;
+  border-color: var(--hd-stroke) !important;
 }
 header a, header a:visited, header .title, header .title a,
 header .dropdown > a, .page-header a, .project-header a {
-  color: var(--h-text) !important;
+  color: var(--hd-ink) !important;
 }
-header a:hover, .page-header a:hover, .project-header a:hover {
-  color: var(--h-blue) !important;
-}
-header .fa, header .fas, header .far { color: var(--h-muted); }
-/* A readable text fallback. Logo replacement belongs to Customizer images. */
-header .logo, header .title { font-weight: 600; }
+header a:hover, header .title a:hover { color: var(--hd-link) !important; }
+header h1, header .title { font-weight: 600; letter-spacing: .01em; }
+header .fa, header .fas, header .far { color: var(--hd-muted); }
+.page-header, .project-header { min-height: 41px; }
 
-/* Content and sidebar */
-.page, .page-container, .page-content, main, .dashboard, .project-overview {
-  background: var(--h-bg);
-  color: var(--h-text);
+/* Neutral application surfaces */
+.page, .page-container, .page-content, main,
+.dashboard, .dashboard-widget, .project-overview,
+.board-container, .board, .board-table, .table-board {
+  background: var(--hd-bg) !important;
+  color: var(--hd-ink) !important;
 }
 .sidebar, aside.sidebar, .sidebar-container, .sidebar-content {
-  background: var(--h-surface) !important;
-  color: var(--h-muted) !important;
+  background: var(--hd-nav) !important;
+  color: var(--hd-muted) !important;
+  border-right: 1px solid var(--hd-stroke);
 }
-.sidebar a, .sidebar a:visited, .sidebar li a {
-  color: var(--h-muted) !important;
-}
+.sidebar a, .sidebar a:visited, .sidebar li a { color: var(--hd-muted) !important; }
 .sidebar a:hover, .sidebar .active a, .sidebar li.active a,
-.sidebar .selected a { color: var(--h-text) !important; }
-.sidebar .active, .sidebar li.active, .sidebar .selected {
-  background: var(--h-surface-raised);
-  border-left: 3px solid var(--h-blue);
+.sidebar .selected a { color: #fff !important; }
+.sidebar li.active, .sidebar .selected, .sidebar .active {
+  background: #324d60 !important;
+  border-left: 3px solid var(--hd-blue);
 }
-h1,h2,h3,h4,h5,h6, label, strong { color: var(--h-text); }
-a, a:visited { color: var(--h-blue); }
-a:hover { color: #8fd2ff; }
-small, .color-grey, .text-muted, .task-board-age { color: var(--h-muted) !important; }
+/* Native sidebars remain visible in their existing routes. Don't
+   force a sidebar on the board, which Kanboard does not render. */
 
-/* Panels, menus, input controls */
-.panel, .listing, .form-actions, .accordion-section, .dashboard-widget,
-.table-striped, .table-scrolling, .modal-content, .dropdown-menu,
-.popover-content, .tooltip, .alert {
-  background: var(--h-surface) !important;
-  color: var(--h-text) !important;
-  border-color: var(--h-border) !important;
-}
-.accordion-title, .accordion-section-title {
-  background: var(--h-surface-raised) !important;
-  color: var(--h-text) !important;
-}
-input:not([type='checkbox']):not([type='radio']):not([type='color']),
-select, textarea, .select2-selection {
-  background: var(--h-surface-raised) !important;
-  color: var(--h-text) !important;
-  border: 1px solid var(--h-border) !important;
-  border-radius: 4px;
-}
-input::placeholder, textarea::placeholder { color: var(--h-muted); opacity: 1; }
-button, .btn, input[type='submit'], .button {
-  border-radius: 4px;
-}
-button:focus-visible, a:focus-visible, input:focus-visible,
-select:focus-visible, textarea:focus-visible {
-  outline: 2px solid var(--h-blue);
-  outline-offset: 2px;
-}
-table { color: var(--h-text); }
-table th, table td, .table-list-row {
-  border-color: var(--h-border) !important;
-}
-table th { background: var(--h-surface-raised); color: var(--h-text); }
-table tr:nth-child(even) { background: rgba(255,255,255,.035); }
-
-/* Board structure; do not force widths or replace Kanboard layout mechanics */
-.board-container, .board, .board-table, .table-board, .board-column {
-  background: var(--h-bg);
-}
-.board-column-header, .board-column-header a, .board-column-header strong,
-.board-header, .board-column-title {
-  color: var(--h-text) !important;
-}
-.board-column-header { background: var(--h-surface) !important; border-bottom: 2px solid var(--h-border); }
-.board-column-header a { text-decoration: none; }
-.board-column-header a:hover { color: var(--h-blue) !important; }
-.board-column { border-color: var(--h-border) !important; }
-.board-task-list, .board-column-task-list { background: var(--h-bg); }
-
-/* Tasks: override only visual colors, not positioning */
-.task-board, .task-board.color-default, .task-board.color-grey {
-  background: var(--h-card) !important;
-  color: var(--h-text) !important;
-  border: 1px solid var(--h-border) !important;
-  border-radius: 5px;
-  box-shadow: none !important;
-}
-.task-board:hover { border-color: var(--h-blue) !important; }
-.task-board a, .task-board a:visited, .task-board-title, .task-board-title a {
-  color: var(--h-text) !important;
-}
-.task-board a:hover, .task-board-title a:hover { color: var(--h-blue) !important; }
-.task-board-header, .task-board-footer, .task-board-details,
-.task-board .task-board-assignee, .task-board .task-board-age {
-  color: var(--h-muted) !important;
-}
-.task-board .task-board-reference, .task-board .task-id { color: var(--h-muted) !important; }
-.task-board .task-board-category, .task-board .task-board-tag,
-.task-board .task-tag, .task-tags li, .task-tag {
-  background: #3c5260 !important;
-  color: #fff !important;
-  border: 1px solid #5b7483 !important;
-  border-radius: 3px;
-}
-.task-board .task-board-category a, .task-board .task-board-tag a,
-.task-board .task-tag a { color: #fff !important; }
-
-/* Respect Kanboard's distinct user-selected task colors, keep text readable */
-.task-board.color-red { background: #542c35 !important; border-color: #ba6777 !important; }
-.task-board.color-orange { background: #593f2b !important; border-color: #c58b4f !important; }
-.task-board.color-yellow { background: #514b2c !important; border-color: #b4a457 !important; }
-.task-board.color-green { background: #244e43 !important; border-color: #5baf98 !important; }
-.task-board.color-blue { background: #24445b !important; border-color: #5d9abf !important; }
-.task-board.color-purple { background: #463654 !important; border-color: #9772b4 !important; }
-.task-board.color-brown { background: #4a3e34 !important; border-color: #99806a !important; }
-
-/* Column identity, visible with or without populated tasks */
-.board-column-header:has(a[href*='Blocked']),
-.board-column-header:has(a[href*='blocked']) { border-bottom-color: var(--h-red); }
-.board-column-header:has(a[href*='Done']),
-.board-column-header:has(a[href*='done']) { border-bottom-color: var(--h-green); }
-
-/* Alerts and status */
-.alert-info { background: #17384d !important; color: #e0f5ff !important; }
-.alert-success { background: #194638 !important; color: #e3fff3 !important; }
-.alert-warning { background: #564125 !important; color: #fff0d4 !important; }
-.alert-error, .alert-danger { background: #582d36 !important; color: #ffe9ee !important; }
-.progress-bar, progress { accent-color: var(--h-blue); }
-hr, .border-bottom { border-color: var(--h-border) !important; }
-
-/* Never turn customizer configuration labels white on a white inherited input */
-input[type='color'] { background: transparent; }
-
-/* Smaller screens: preserve native board scrolling */
-@media (max-width: 800px) {
-  .sidebar { border-right: 1px solid var(--h-border); }
-  .task-board { min-width: 0; }
-}
-
-
-/* =============================================================
-   v0.2.0 — Balanced dark refinement
-   Tested visually against Kanboard's five-column Theme Sandbox.
-   ============================================================= */
-:root {
-  --h-bg: #121b22;
-  --h-surface: #1b2933;
-  --h-surface-raised: #253641;
-  --h-card: #30434f;
-  --h-border: #435866;
-  --h-text: #f1f6f9;
-  --h-muted: #c4d2d9;
-  --h-blue: #59bcff;
-  --h-orange: #fca06b;
-  --h-green: #62d6ae;
-  --h-red: #ff9999;
-}
-html, body { font-size: 15px; line-height: 1.45; }
-body > header, header, .header, .page-header, .project-header {
-  background: #1b2933 !important;
-  border-bottom: 1px solid #4c6372 !important;
-}
-header .title, header .title a, header a,
-header a:visited, header .dropdown > a {
-  color: #f4f8fa !important;
-}
-.page-header, .project-header { min-height: 38px; }
-.page-header h1, .project-header h1,
-header h1, header .title { font-size: 20px; letter-spacing: .005em; }
-.page, .page-container, .page-content, main, .dashboard,
-.board-container, .board, .board-table, .table-board {
-  background-color: #121b22 !important;
-}
-/* Kanboard's tab switcher uses white native backgrounds without explicit overrides.
-   Style both inactive and active tabs so no light rectangles survive. */
-.views-switcher-component, .views-switcher,
-.project-header .views-switcher, .project-header .nav-tabs,
-.nav-tabs, .tabs, .tabs ul {
-  background: #1b2933 !important;
-  border-color: #435866 !important;
-  color: #d5e1e7 !important;
+/* Native project toolbar and its tabs: no invisible white-on-white labels. */
+.views-switcher-component, .views-switcher, .nav-tabs, .tabs, .tabs ul,
+.filter-box, .filter-box-component, .board-selector-container {
+  background: var(--hd-nav) !important;
+  color: var(--hd-ink) !important;
+  border-color: var(--hd-stroke) !important;
 }
 .views-switcher-component a, .views-switcher a,
-.views-switcher-component a:visited, .views-switcher a:visited,
-.nav-tabs a, .nav-tabs a:visited, .tabs a, .tabs a:visited,
-.views-switcher-component li a, .views-switcher li a {
-  background: #253641 !important;
-  color: #d5e1e7 !important;
-  border: 1px solid #435866 !important;
+.nav-tabs a, .tabs a, .views-switcher-component li a,
+.views-switcher li a, .nav-tabs li a,
+.views-switcher-component a:visited, .views-switcher a:visited {
+  background: #304655 !important;
+  color: #f4f9fc !important;
+  border: 1px solid var(--hd-stroke) !important;
   box-shadow: none !important;
-}
-.views-switcher-component a:hover, .views-switcher a:hover,
-.nav-tabs a:hover, .tabs a:hover {
-  background: #334956 !important;
-  color: #ffffff !important;
 }
 .views-switcher-component .active a, .views-switcher .active a,
 .views-switcher-component a.active, .views-switcher a.active,
-.nav-tabs .active a, .nav-tabs a.active, .tabs .active a {
-  background: #34556a !important;
-  color: #ffffff !important;
-  border-color: #59bcff !important;
-  box-shadow: inset 0 -2px #59bcff !important;
+.nav-tabs .active a, .tabs .active a, .tabs a.active {
+  background: #28658c !important;
+  color: #fff !important;
+  border-color: var(--hd-blue) !important;
+  box-shadow: inset 0 -2px var(--hd-blue) !important;
 }
-/* Toolbar and filters */
-.filter-box, .filter-box-component, .filter-box form,
-.project-header .dropdown, .board-selector-container {
-  background-color: #1b2933 !important;
-  color: #e6f0f5 !important;
+.views-switcher-component a:hover, .views-switcher a:hover,
+.nav-tabs a:hover, .tabs a:hover {
+  background: #426276 !important;
+  color: #fff !important;
 }
-.filter-box input, .filter-box-component input, .filter-box select {
-  background: #253641 !important;
-  color: #f1f6f9 !important;
-  border-color: #4a6070 !important;
+.project-header .dropdown, .filter-box form { background: transparent !important; }
+
+/* Kanban columns */
+.board-column, .board-column-task-list, .board-task-list {
+  background: #213440 !important;
+  border-color: var(--hd-stroke) !important;
 }
-.board-column { border-right: 1px solid #364a58 !important; }
+.board-column { border-right: 1px solid var(--hd-stroke) !important; }
 .board-column-header, .board-header, .board-column-title {
-  background: #1b2933 !important;
-  border-bottom: 2px solid #50788d !important;
-  padding-top: 6px !important;
-  padding-bottom: 6px !important;
+  background: var(--hd-panel) !important;
+  color: #fff !important;
+  border-bottom: 3px solid #7894a7 !important;
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
 }
-.board-column-header, .board-column-header a,
-.board-column-header strong, .board-column-title {
-  color: #f1f6f9 !important;
-  font-size: 14px;
-  font-weight: 600;
-}
-.board-column-header .color-grey { color: #b9ced8 !important; }
-.board-column-task-list, .board-task-list { background: #16232b !important; }
-.task-board, .task-board.color-default, .task-board.color-grey {
-  background: #30434f !important;
-  border: 1px solid #527081 !important;
-  color: #f1f6f9 !important;
-  padding: 8px 9px !important;
-  min-height: 80px;
-  box-shadow: 0 1px 3px rgba(0,0,0,.18) !important;
-  transition: border-color .15s ease, background-color .15s ease;
-}
-.task-board:hover { background: #364d5b !important; border-color: #59bcff !important; }
-.task-board-title, .task-board-title a, .task-board > a {
+.board-column-header a, .board-column-header strong,
+.board-column-title, .board-column-header .color-grey {
+  color: #f2f8fb !important;
   font-size: 14px !important;
-  line-height: 1.45;
-  font-weight: 600;
-  color: #fff !important;
+  font-weight: 600 !important;
 }
-.task-board-header, .task-board-footer, .task-board-details {
-  color: #c8d6de !important;
+.board-column-header a:hover { color: var(--hd-link) !important; }
+/* Current canonical workflow order: Backlog, Ready, WIP, Blocked, Done.
+   Column-position accents will need adjustment for differently ordered boards. */
+.board-column:nth-child(2) .board-column-header { border-bottom-color: var(--hd-blue) !important; }
+.board-column:nth-child(3) .board-column-header { border-bottom-color: var(--hd-orange) !important; }
+.board-column:nth-child(4) .board-column-header { border-bottom-color: var(--hd-red) !important; }
+.board-column:nth-child(5) .board-column-header { border-bottom-color: var(--hd-green) !important; }
+
+/* Comfortable task cards with HIGH contrast: dark ink on pale slate.
+   Preserve Kanboard card geometry and drag-and-drop behavior. */
+.task-board, .task-board.color-default, .task-board.color-grey {
+  background: var(--hd-card) !important;
+  color: var(--hd-card-text) !important;
+  border: 1px solid #7b9caf !important;
+  border-left: 4px solid #6f91a6 !important;
+  border-radius: var(--hd-radius) !important;
+  padding: 12px 11px !important;
+  min-height: 118px;
+  box-shadow: 0 2px 7px rgba(0,0,0,.18) !important;
+  transition: background-color .12s ease, border-color .12s ease;
+}
+.task-board:hover, .task-board.color-default:hover {
+  background: var(--hd-card-hover) !important;
+  border-color: #e7f1f7 !important;
+}
+.task-board a, .task-board a:visited,
+.task-board-title, .task-board-title a, .task-board-title a:visited,
+.task-board strong {
+  color: var(--hd-card-text) !important;
+}
+.task-board-title, .task-board-title a {
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  line-height: 1.45 !important;
+}
+.task-board a:hover, .task-board-title a:hover { color: #005d96 !important; }
+.task-board-header, .task-board-footer, .task-board-details,
+.task-board .task-board-assignee, .task-board .task-board-age,
+.task-board .task-board-reference, .task-board .task-id,
+.task-board .color-grey {
+  color: #314a5a !important;
   font-size: 12px !important;
 }
-.task-board .task-board-reference, .task-board .task-id {
-  font-size: 12px !important;
-  color: #d1dde3 !important;
-}
-.task-board .task-board-tag, .task-board .task-tag, .task-tags li, .task-tag {
-  background: #526874 !important;
-  border: 1px solid #75909d !important;
-  color: #fff !important;
+.task-board .task-board-tag, .task-board .task-tag,
+.task-tags li, .task-tag, .task-board .task-board-category {
+  background: #dce6ed !important;
+  color: #1b3444 !important;
+  border: 1px solid #829cae !important;
+  border-radius: 4px !important;
   font-weight: 600;
 }
-.board-column:nth-child(4) .board-column-header,
-.board-column-header:has([title="Blocked"]) {
-  border-bottom-color: #ed8a8a !important;
+.task-board .task-board-tag a, .task-board .task-tag a,
+.task-board .task-board-category a { color: #1b3444 !important; }
+.board-column:nth-child(2) .task-board { border-left-color: var(--hd-blue) !important; }
+.board-column:nth-child(3) .task-board { border-left-color: var(--hd-orange) !important; }
+.board-column:nth-child(4) .task-board { border-left-color: var(--hd-red) !important; }
+.board-column:nth-child(5) .task-board { border-left-color: var(--hd-green) !important; }
+
+/* Preserve user-selected colored cards, without forcing pale background
+   across their classes. */
+.task-board.color-red { background: #f7c9cd !important; border-color: #e79da4 !important; }
+.task-board.color-orange { background: #f8d7b9 !important; border-color: #d5aa82 !important; }
+.task-board.color-yellow { background: #f7e7ac !important; border-color: #d7c37f !important; }
+.task-board.color-green { background: #c7e8d9 !important; border-color: #8ccbb0 !important; }
+.task-board.color-blue { background: #c7e1f2 !important; border-color: #8bb9d4 !important; }
+.task-board.color-purple { background: #e0d3f0 !important; border-color: #b8a3d1 !important; }
+.task-board.color-brown { background: #dfd0c1 !important; border-color: #bba58f !important; }
+
+/* Lists, dialogs, forms, settings, and Customizer */
+.panel, .listing, .accordion-section, .form-actions,
+.modal-content, .dropdown-menu, .popover-content, .tooltip,
+.table-scrolling, .dashboard-widget, .alert {
+  background: var(--hd-panel) !important;
+  color: var(--hd-ink) !important;
+  border-color: var(--hd-stroke) !important;
 }
-.board-column:nth-child(5) .board-column-header,
-.board-column-header:has([title="Done"]) {
-  border-bottom-color: #60cda6 !important;
+.accordion-title, .accordion-section-title {
+  background: var(--hd-panel-light) !important;
+  color: #fff !important;
 }
-.board-column:nth-child(4) .task-board { border-left: 3px solid #ed8a8a !important; }
-.board-column:nth-child(5) .task-board { border-left: 3px solid #60cda6 !important; }
-.sidebar a, .sidebar a:visited, .sidebar li a { color: #cbd8e0 !important; }
-.sidebar li.active a, .sidebar a:hover { color: #fff !important; }
-.dropdown-menu, .dropdown-menu a, .popover-content, .tooltip {
-  color: #f1f6f9 !important;
+.dropdown-menu a, .dropdown-menu a:visited { color: var(--hd-ink) !important; }
+.dropdown-menu a:hover { background: #3b5667 !important; }
+input:not([type='checkbox']):not([type='radio']):not([type='color']),
+select, textarea, .select2-selection {
+  background: #314755 !important;
+  color: #fff !important;
+  border: 1px solid #668093 !important;
+  border-radius: 4px;
 }
-.dropdown-menu a:hover { background: #334956 !important; }
+input::placeholder, textarea::placeholder { color: #c6d6df; opacity: 1; }
+label, legend { color: var(--hd-ink) !important; }
+table { color: var(--hd-ink); }
+table th { color: var(--hd-ink); background: #354d5c !important; }
+table td, table th, .table-list-row { border-color: var(--hd-stroke) !important; }
+table tr:nth-child(even) { background: rgba(255,255,255,.045); }
+button, .btn, input[type='submit'], .button { border-radius: 5px; }
+a:focus-visible, button:focus-visible, input:focus-visible,
+select:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--hd-blue);
+  outline-offset: 2px;
+}
+.alert-info { background: #244f69 !important; color: #eefaff !important; }
+.alert-success { background: #235542 !important; color: #edfff7 !important; }
+.alert-warning { background: #69502d !important; color: #fff5df !important; }
+.alert-error, .alert-danger { background: #633b45 !important; color: #fff0f2 !important; }
+progress, .progress-bar { accent-color: var(--hd-blue); }
 @media (max-width: 800px) {
-  .task-board { padding: 7px !important; min-height: 68px; }
+  .task-board { min-height: 94px; padding: 9px !important; }
+  .board-column-header { padding-block: 6px !important; }
 }
