@@ -1,9 +1,9 @@
 /*
  * Hallman.Digital Kanboard theme
  * Source of truth: Hallman-Digital/kanboard-mcp/themes/Hallman.css
- * Version: 0.1.0 | 2026-10-12
+ * Version: 0.2.0 | 2026-10-12
  * Customizer > Manage Themes > Upload a theme
- * IBM Plex typography; clean dark surfaces; readable Kanban cards.
+ * IBM Plex typography; balanced charcoal surfaces; accessible navigation and readable cards.
  * No external logo URLs or browser-specific hacks.
  */
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
@@ -180,4 +180,145 @@ input[type='color'] { background: transparent; }
 @media (max-width: 800px) {
   .sidebar { border-right: 1px solid var(--h-border); }
   .task-board { min-width: 0; }
+}
+
+
+/* =============================================================
+   v0.2.0 — Balanced dark refinement
+   Tested visually against Kanboard's five-column Theme Sandbox.
+   ============================================================= */
+:root {
+  --h-bg: #121b22;
+  --h-surface: #1b2933;
+  --h-surface-raised: #253641;
+  --h-card: #30434f;
+  --h-border: #435866;
+  --h-text: #f1f6f9;
+  --h-muted: #c4d2d9;
+  --h-blue: #59bcff;
+  --h-orange: #fca06b;
+  --h-green: #62d6ae;
+  --h-red: #ff9999;
+}
+html, body { font-size: 15px; line-height: 1.45; }
+body > header, header, .header, .page-header, .project-header {
+  background: #1b2933 !important;
+  border-bottom: 1px solid #4c6372 !important;
+}
+header .title, header .title a, header a,
+header a:visited, header .dropdown > a {
+  color: #f4f8fa !important;
+}
+.page-header, .project-header { min-height: 38px; }
+.page-header h1, .project-header h1,
+header h1, header .title { font-size: 20px; letter-spacing: .005em; }
+.page, .page-container, .page-content, main, .dashboard,
+.board-container, .board, .board-table, .table-board {
+  background-color: #121b22 !important;
+}
+/* Kanboard's tab switcher uses white native backgrounds without explicit overrides.
+   Style both inactive and active tabs so no light rectangles survive. */
+.views-switcher-component, .views-switcher,
+.project-header .views-switcher, .project-header .nav-tabs,
+.nav-tabs, .tabs, .tabs ul {
+  background: #1b2933 !important;
+  border-color: #435866 !important;
+  color: #d5e1e7 !important;
+}
+.views-switcher-component a, .views-switcher a,
+.views-switcher-component a:visited, .views-switcher a:visited,
+.nav-tabs a, .nav-tabs a:visited, .tabs a, .tabs a:visited,
+.views-switcher-component li a, .views-switcher li a {
+  background: #253641 !important;
+  color: #d5e1e7 !important;
+  border: 1px solid #435866 !important;
+  box-shadow: none !important;
+}
+.views-switcher-component a:hover, .views-switcher a:hover,
+.nav-tabs a:hover, .tabs a:hover {
+  background: #334956 !important;
+  color: #ffffff !important;
+}
+.views-switcher-component .active a, .views-switcher .active a,
+.views-switcher-component a.active, .views-switcher a.active,
+.nav-tabs .active a, .nav-tabs a.active, .tabs .active a {
+  background: #34556a !important;
+  color: #ffffff !important;
+  border-color: #59bcff !important;
+  box-shadow: inset 0 -2px #59bcff !important;
+}
+/* Toolbar and filters */
+.filter-box, .filter-box-component, .filter-box form,
+.project-header .dropdown, .board-selector-container {
+  background-color: #1b2933 !important;
+  color: #e6f0f5 !important;
+}
+.filter-box input, .filter-box-component input, .filter-box select {
+  background: #253641 !important;
+  color: #f1f6f9 !important;
+  border-color: #4a6070 !important;
+}
+.board-column { border-right: 1px solid #364a58 !important; }
+.board-column-header, .board-header, .board-column-title {
+  background: #1b2933 !important;
+  border-bottom: 2px solid #50788d !important;
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+}
+.board-column-header, .board-column-header a,
+.board-column-header strong, .board-column-title {
+  color: #f1f6f9 !important;
+  font-size: 14px;
+  font-weight: 600;
+}
+.board-column-header .color-grey { color: #b9ced8 !important; }
+.board-column-task-list, .board-task-list { background: #16232b !important; }
+.task-board, .task-board.color-default, .task-board.color-grey {
+  background: #30434f !important;
+  border: 1px solid #527081 !important;
+  color: #f1f6f9 !important;
+  padding: 8px 9px !important;
+  min-height: 80px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.18) !important;
+  transition: border-color .15s ease, background-color .15s ease;
+}
+.task-board:hover { background: #364d5b !important; border-color: #59bcff !important; }
+.task-board-title, .task-board-title a, .task-board > a {
+  font-size: 14px !important;
+  line-height: 1.45;
+  font-weight: 600;
+  color: #fff !important;
+}
+.task-board-header, .task-board-footer, .task-board-details {
+  color: #c8d6de !important;
+  font-size: 12px !important;
+}
+.task-board .task-board-reference, .task-board .task-id {
+  font-size: 12px !important;
+  color: #d1dde3 !important;
+}
+.task-board .task-board-tag, .task-board .task-tag, .task-tags li, .task-tag {
+  background: #526874 !important;
+  border: 1px solid #75909d !important;
+  color: #fff !important;
+  font-weight: 600;
+}
+.board-column:nth-child(4) .board-column-header,
+.board-column-header:has([title="Blocked"]) {
+  border-bottom-color: #ed8a8a !important;
+}
+.board-column:nth-child(5) .board-column-header,
+.board-column-header:has([title="Done"]) {
+  border-bottom-color: #60cda6 !important;
+}
+.board-column:nth-child(4) .task-board { border-left: 3px solid #ed8a8a !important; }
+.board-column:nth-child(5) .task-board { border-left: 3px solid #60cda6 !important; }
+.sidebar a, .sidebar a:visited, .sidebar li a { color: #cbd8e0 !important; }
+.sidebar li.active a, .sidebar a:hover { color: #fff !important; }
+.dropdown-menu, .dropdown-menu a, .popover-content, .tooltip {
+  color: #f1f6f9 !important;
+}
+.dropdown-menu a:hover { background: #334956 !important; }
+@media (max-width: 800px) {
+  .task-board { padding: 7px !important; min-height: 68px; }
 }
