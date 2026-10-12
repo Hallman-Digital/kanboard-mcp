@@ -36,6 +36,18 @@ jobs:
           rsync -a --exclude .git --exclude .github --exclude dist --exclude themes --exclude '*.zip' ./ dist/ModelContextProtocol/
           (cd dist && zip -X -qr ModelContextProtocol.zip ModelContextProtocol)
           unzip -t dist/ModelContextProtocol.zip | tail -1
+          # PluginManager reads the FIRST ZIP entry as the plugin folder.
+          python3 - <<'PY'
+          import zipfile
+          with zipfile.ZipFile('dist/ModelContextProtocol.zip') as z:
+              names = z.namelist()
+              assert names[0] == 'ModelContextProtocol/', f'Unexpected first entry: {names[0]}'
+              assert 'ModelContextProtocol/Plugin.php' in names
+              source = z.read('ModelContextProtocol/Plugin.php').decode()
+              assert 'namespace Kanboard\\Plugin\\ModelContextProtocol;' in source
+              assert "return 'ModelContextProtocol';" in source
+              assert z.testzip() is None
+          PY
           unzip -Z1 dist/ModelContextProtocol.zip | grep -Fx 'ModelContextProtocol/Plugin.php'
           ! unzip -Z1 dist/ModelContextProtocol.zip | grep -E 'kanboard-mcp-master|\.github/|themes/'
           mkdir -p verify/plugins
