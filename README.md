@@ -202,4 +202,4 @@ This plugin is released under the MIT License - see [LICENSE](LICENSE) file for 
 
 ## Installable releases
 
-Use the `ModelContextProtocol.zip` asset from [GitHub Releases](https://github.com/Hallman-Digital/kanboard-mcp/releases), not GitHub's `kanboard-mcp-master.zip` source archive. The release workflow checks the folder layout expected by aljawaid's Kanboard PluginManager and publishes a correctly named ZIP. The packaged plugin is version 1.2.0. To publish future versions, update Plugin.php and create a corresponding `v*` tag, or use the manual workflow dispatch.
+Use the `ModelContextProtocol.zip` asset from [GitHub Releases](https://github.com/Hallman-Digital/kanboard-mcp/releases), not GitHub's `kanboard-mcp-master.zip` source archive. The release workflow checks the folder layout expected by aljawaid's Kanboard PluginManager and publishes a correctly named ZIP. The current packaged plugin is version 1.2.1. In this release, Customizer CSS tools are listed first to avoid connector-side tool-list truncation. To publish future versions, update Plugin.php and create a corresponding `v*` tag, or use the manual workflow dispatch.
