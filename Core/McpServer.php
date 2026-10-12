@@ -693,6 +693,27 @@ class McpServer extends Base
                 ],
             ],
             [
+                'name' => 'get_application_css',
+                'description' => 'Read the Custom Stylesheet from Kanboard Application Settings',
+                'inputSchema' => [
+                    'type' => 'object',
+                    'properties' => [],
+                    'additionalProperties' => false,
+                ],
+            ],
+            [
+                'name' => 'set_application_css',
+                'description' => 'Replace the complete Application Settings Custom Stylesheet. Requires MCP_ALLOW_APPLICATION_CSS_WRITE enabled in config.php.',
+                'inputSchema' => [
+                    'type' => 'object',
+                    'properties' => [
+                        'css' => ['type' => 'string', 'description' => 'Complete CSS stylesheet; empty string clears it'],
+                    ],
+                    'required' => ['css'],
+                    'additionalProperties' => false,
+                ],
+            ],
+            [
                 'name' => 'get_custom_css',
                 'description' => 'Get the active Customizer theme CSS and current theme selection',
                 'inputSchema' => [
@@ -1157,6 +1178,44 @@ class McpServer extends Base
                         return $this->createToolExecutionErrorResponse('Destructive action requires confirm=true', $id);
                     }
                     $result = ['success' => $this->container['subtaskModel']->remove($subtaskId)];
+                    break;
+
+                // Hallman additions - native Application Settings custom stylesheet.
+                // MCP tokens are independent of the web session. The deployment owner
+                // must explicitly opt into configuration writes in config.php.
+                case 'get_application_css':
+                    $css = (string) $this->container['configModel']->get('application_stylesheet', '');
+                    $result = [
+                        'css' => $css,
+                        'length' => strlen($css),
+                        'setting' => 'application_stylesheet',
+                    ];
+                    break;
+
+                case 'set_application_css':
+                    if (!defined('MCP_ALLOW_APPLICATION_CSS_WRITE') || MCP_ALLOW_APPLICATION_CSS_WRITE !== true) {
+                        return $this->createToolExecutionErrorResponse(
+                            'Application CSS writes disabled. Set MCP_ALLOW_APPLICATION_CSS_WRITE to true in config.php to opt in.',
+                            $id
+                        );
+                    }
+                    if (!array_key_exists('css', $arguments) || !is_string($arguments['css'])) {
+                        return $this->createToolExecutionErrorResponse('Invalid arguments: css must be a string', $id);
+                    }
+                    $css = $arguments['css'];
+                    if (strlen($css) > 262144) {
+                        return $this->createToolExecutionErrorResponse('CSS exceeds the 256 KiB limit', $id);
+                    }
+                    $previousCss = (string) $this->container['configModel']->get('application_stylesheet', '');
+                    $saved = $this->container['configModel']->save([
+                        'application_stylesheet' => $css,
+                    ]);
+                    $result = [
+                        'success' => (bool) $saved,
+                        'setting' => 'application_stylesheet',
+                        'previous_length' => strlen($previousCss),
+                        'length' => strlen($css),
+                    ];
                     break;
 
                 // Hallman additions - Customizer CSS
