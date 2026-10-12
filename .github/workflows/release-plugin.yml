@@ -1,0 +1,72 @@
+name: Build Kanboard release ZIP
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "Release tag to publish (example: v1.2.0)"
+        required: true
+        default: "v1.2.0"
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+      - name: Build and validate ZIP
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f Plugin.php
+          test -f Core/McpServer.php
+          find . -name '*.php' -not -path './.git/*' -print0 | xargs -0 -n 1 php -l > /dev/null
+          mkdir -p dist/ModelContextProtocol
+          rsync -a --exclude .git --exclude .github --exclude dist --exclude themes --exclude '*.zip' ./ dist/ModelContextProtocol/
+          (cd dist && zip -X -qr ModelContextProtocol.zip ModelContextProtocol)
+          unzip -t dist/ModelContextProtocol.zip | tail -1
+          unzip -Z1 dist/ModelContextProtocol.zip | grep -Fx 'ModelContextProtocol/Plugin.php'
+          ! unzip -Z1 dist/ModelContextProtocol.zip | grep -E 'kanboard-mcp-master|\.github/|themes/'
+          mkdir -p verify/plugins
+          unzip -q dist/ModelContextProtocol.zip -d verify/plugins
+          test -f verify/plugins/ModelContextProtocol/Plugin.php
+          php -l verify/plugins/ModelContextProtocol/Plugin.php
+      - name: Upload ZIP as build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Kanboard-Plugin-Installable
+          path: dist/ModelContextProtocol.zip
+          if-no-files-found: error
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          INPUT_TAG: ${{ inputs.release_tag }}
+          GITHUB_REF_TYPE: ${{ github.ref_type }}
+          GITHUB_REF_NAME: ${{ github.ref_name }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "$GITHUB_REF_TYPE" == "tag" ]]; then
+            TAG="$GITHUB_REF_NAME"
+          else
+            TAG="$INPUT_TAG"
+          fi
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" dist/ModelContextProtocol.zip --clobber
+          else
+            gh release create "$TAG" dist/ModelContextProtocol.zip \
+              --target "${GITHUB_SHA}" \
+              --title "ModelContextProtocol $TAG" \
+              --notes "Kanboard-ready release ZIP. Archive contains ModelContextProtocol/Plugin.php and the plugin source; no manual renaming."
+          fi
