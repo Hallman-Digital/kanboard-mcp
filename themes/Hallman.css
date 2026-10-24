@@ -118,3 +118,21 @@ code, pre, kbd, samp,
 #board th.board-column-header-10,
 #board th.board-column-header-20,
 #board th.board-column-header-5 { border-bottom: 3px solid #48a56a !important; }
+
+/* Stock Kanboard cards are 1px; recent cards otherwise become 2px.
+   Keep a consistent solid 1px border for all workflow-colored cards. */
+#board .task-board,
+#board div.task-board-recent,
+#board div.task-board-status-closed {
+  border-width: 1px !important;
+  border-style: solid !important;
+}
+
+/* Hide the task-only color control in creation/edit forms.
+   Leave unrelated category and tag color pickers unaffected. */
+form:has(#form-title) label[for="form-color_id"],
+form:has(#form-title) #form-color_id,
+form:has(#form-title) #form-color_id + .select2,
+form:has(#form-title) select[name="color_id"] + .select2 {
+  display: none !important;
+}
