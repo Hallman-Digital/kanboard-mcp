@@ -17,14 +17,15 @@ input[type="submit"]:hover {
 
 /* Workflow card colors: based on column position, not individual task data.
    Applies to boards using Backlog / Ready / WIP / Blocked / Done in that order. */
-#board td:nth-child(1) .task-board { background: #e8edf2 !important; border: 2px solid #9aa8b6 !important; }
-#board td:nth-child(2) .task-board { background: #dceeff !important; border: 2px solid #4b9be7 !important; }
-#board td:nth-child(3) .task-board { background: #fff0d6 !important; border: 2px solid #e7a13c !important; }
-#board td:nth-child(4) .task-board { background: #ffe0e0 !important; border: 2px solid #dc6262 !important; }
-#board td:nth-child(5) .task-board { background: #def3e4 !important; border: 2px solid #48a56a !important; }
+#board td:nth-child(1) .task-board { background: #e8edf2 !important; border-color: #9aa8b6 !important; }
+#board td:nth-child(2) .task-board { background: #dceeff !important; border-color: #4b9be7 !important; }
+#board td:nth-child(3) .task-board { background: #fff0d6 !important; border-color: #e7a13c !important; }
+#board td:nth-child(4) .task-board { background: #ffe0e0 !important; border-color: #dc6262 !important; }
+#board td:nth-child(5) .task-board { background: #def3e4 !important; border-color: #48a56a !important; }
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
 
 /* IBM Plex typography, preserving native Kanboard sizing and layout. */
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
 html, body, button, input, select, textarea, label {
   font-family: 'IBM Plex Sans', system-ui, sans-serif !important;
 }
@@ -36,3 +37,15 @@ code, pre, kbd, samp,
 .task-board .task-icon-age span {
   font-family: 'IBM Plex Mono', ui-monospace, monospace !important;
 }
+
+/* Minimal workflow indicators on column headers (same palette as task cards). */
+#board th.board-column-header:nth-child(1) { border-bottom: 3px solid #9aa8b6 !important; }
+#board th.board-column-header:nth-child(2) { border-bottom: 3px solid #4b9be7 !important; }
+#board th.board-column-header:nth-child(3) { border-bottom: 3px solid #e7a13c !important; }
+#board th.board-column-header:nth-child(4) { border-bottom: 3px solid #dc6262 !important; }
+#board th.board-column-header:nth-child(5) { border-bottom: 3px solid #48a56a !important; }
+
+/* Hover feedback: brighten border without changing native card geometry. */
+#board .task-board { transition: box-shadow 120ms ease, filter 120ms ease; }
+#board .task-board:hover { filter: brightness(1.025); box-shadow: 0 2px 7px rgba(20,35,50,.15); }
+@media (prefers-reduced-motion: reduce) { #board .task-board { transition: none; } }
