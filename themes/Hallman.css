@@ -136,3 +136,6 @@ form:has(#form-title) #form-color_id + .select2,
 form:has(#form-title) select[name="color_id"] + .select2 {
   display: none !important;
 }
+
+/* Remove task age and days-in-column badges from board cards only. */
+#board .task-board .task-icon-age { display: none !important; }
