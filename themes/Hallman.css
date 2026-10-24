@@ -22,3 +22,17 @@ input[type="submit"]:hover {
 #board td:nth-child(3) .task-board { background: #fff0d6 !important; border-left: 3px solid #e7a13c !important; }
 #board td:nth-child(4) .task-board { background: #ffe0e0 !important; border-left: 3px solid #dc6262 !important; }
 #board td:nth-child(5) .task-board { background: #def3e4 !important; border-left: 3px solid #48a56a !important; }
+
+/* IBM Plex typography, preserving native Kanboard sizing and layout. */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
+html, body, button, input, select, textarea, label {
+  font-family: 'IBM Plex Sans', system-ui, sans-serif !important;
+}
+code, pre, kbd, samp,
+.task-board-header > .dropdown > a,
+.task-board-header > .dropdown > a strong,
+.task-board .task-priority,
+.task-board .task-icon-age,
+.task-board .task-icon-age span {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace !important;
+}
