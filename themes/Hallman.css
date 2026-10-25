@@ -158,3 +158,10 @@ form:has(#form-title) select[name="color_id"] + .select2 {
   margin: 0 5px 0 0 !important;
   vertical-align: baseline;
 }
+
+/* Hide unused task Reference field and card badge; retain stored values. */
+#board .task-board .task-board-reference,
+form:has(#form-title) label[for="form-reference"],
+form:has(#form-title) #form-reference {
+  display: none !important;
+}
