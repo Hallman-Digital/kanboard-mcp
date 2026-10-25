@@ -145,3 +145,16 @@ form:has(#form-title) select[name="color_id"] + .select2 {
 #board .task-board .table-suboncard td:nth-child(2) {
   background-color: transparent !important;
 }
+
+/* SubtasksOnBoard: align Font Awesome state icons with IBM Plex text. */
+#board .task-board .table-suboncard .subtask-title a {
+  display: inline-flex !important;
+  align-items: baseline;
+  max-width: 100%;
+}
+#board .task-board .table-suboncard .subtask-title i.fa {
+  display: inline-block !important;
+  flex: 0 0 auto;
+  margin: 0 5px 0 0 !important;
+  vertical-align: baseline;
+}
