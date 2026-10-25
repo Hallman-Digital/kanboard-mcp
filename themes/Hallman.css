@@ -165,3 +165,10 @@ form:has(#form-title) label[for="form-reference"],
 form:has(#form-title) #form-reference {
   display: none !important;
 }
+
+/* Quiet task IDs on board cards without affecting titles or controls. */
+#board .task-board .task-board-header > a:first-child,
+#board .task-board .task-board-header > .dropdown > a:first-child,
+#board .task-board .task-board-header > .dropdown > a:first-child strong {
+  color: #687583 !important;
+}
