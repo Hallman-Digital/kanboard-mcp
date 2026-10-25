@@ -139,3 +139,9 @@ form:has(#form-title) select[name="color_id"] + .select2 {
 
 /* Remove task age and days-in-column badges from board cards only. */
 #board .task-board .task-icon-age { display: none !important; }
+
+/* SubtasksOnBoard: match each parent card background without altering layout. */
+#board .task-board .table-suboncard td:nth-child(1),
+#board .task-board .table-suboncard td:nth-child(2) {
+  background-color: transparent !important;
+}
