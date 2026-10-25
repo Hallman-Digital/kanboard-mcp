@@ -139,29 +139,3 @@ form:has(#form-title) select[name="color_id"] + .select2 {
 
 /* Remove task age and days-in-column badges from board cards only. */
 #board .task-board .task-icon-age { display: none !important; }
-
-/* SubtasksOnBoard: keep checklist integrated with the pastel task card. */
-#board .task-board .table-suboncard {
-  margin: 8px 0 5px;
-  border-top: 1px solid rgba(35, 48, 60, .14);
-  border-bottom: 0;
-  font-family: 'IBM Plex Sans', system-ui, sans-serif !important;
-}
-#board .task-board .table-suboncard td:nth-child(1),
-#board .task-board .table-suboncard td:nth-child(2) {
-  background: rgba(255, 255, 255, .22) !important;
-  color: #26323d;
-  border: 0;
-  padding: 5px 6px 4px !important;
-  font-family: 'IBM Plex Sans', system-ui, sans-serif !important;
-  line-height: 1.4;
-  vertical-align: top;
-}
-#board .task-board .table-suboncard a,
-#board .task-board .table-suboncard .subtask-title {
-  color: #26323d;
-  font-family: 'IBM Plex Sans', system-ui, sans-serif !important;
-}
-#board .task-board .table-suboncard tr + tr td {
-  border-top: 1px solid rgba(35, 48, 60, .08);
-}
