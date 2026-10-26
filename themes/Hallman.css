@@ -232,3 +232,46 @@ form:has(#form-title) #form-reference {
 #board .task-board .task-board-expanded > .task-board-header > a {
   font-size: 12px;
 }
+
+
+/* Footer control order: ID, edit | progress, description, priority | assignee. */
+#board .task-board .task-board-expanded > .task-board-header .dropdown {
+  order: 1 !important;
+  margin-right: 0 !important;
+  color: #8a929b !important;
+}
+#board .task-board .task-board-expanded > .task-board-header a:has(i.fa-edit),
+#board .task-board .task-board-expanded > .task-board-header a:has(i.fa-pencil),
+#board .task-board .task-board-expanded > .task-board-header a.js-modal-large {
+  order: 2 !important;
+  color: #8a929b !important;
+  margin-right: 0 !important;
+}
+#board .task-board .task-board-expanded .task-board-icons-row a[href*="action=subtasks"] {
+  order: 10 !important;
+  margin-left: auto !important;
+  margin-right: 5px !important;
+  color: #8a929b !important;
+}
+#board .task-board .task-board-expanded .task-board-icons-row a[href*="action=description"] {
+  order: 11 !important;
+  margin-right: 5px !important;
+  color: #8a929b !important;
+}
+#board .task-board .task-board-expanded .task-board-icons-row .task-priority {
+  order: 12 !important;
+  margin-right: 0 !important;
+  color: #8a929b !important;
+}
+#board .task-board .task-board-expanded > .task-board-header .task-board-avatars {
+  order: 20 !important;
+  margin-left: auto !important;
+  margin-right: 0 !important;
+}
+#board .task-board .task-board-expanded > .task-board-header .dropdown strong,
+#board .task-board .task-board-expanded > .task-board-header .dropdown strong i,
+#board .task-board .task-board-expanded > .task-board-header a:has(i.fa-edit),
+#board .task-board .task-board-expanded > .task-board-header a:has(i.fa-pencil),
+#board .task-board .task-board-expanded > .task-board-header a.js-modal-large {
+  color: #8a929b !important;
+}
