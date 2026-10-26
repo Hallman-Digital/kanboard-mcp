@@ -1,415 +1,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
-/* Hallman.Digital Kanboard — Minimal branding over native defaults.
-   The Customizer logo is managed separately. Keep Kanboard's layout,
-   typography, cards, forms, tooltips, and accessibility styles intact. */
+
+/* Kanboard modernization: one coherent light theme, no legacy overrides. */
 :root {
-  --hallman-blue: #087bd9;
-  --hallman-orange: #ed8426;
-}
-.btn-blue, .btn-success, button[type="submit"], input[type="submit"] {
-  background: var(--hallman-blue);
-  border-color: var(--hallman-blue);
-}
-.btn-blue:hover, .btn-success:hover, button[type="submit"]:hover,
-input[type="submit"]:hover {
-  background: #0868b7;
-  border-color: #0868b7;
-}
-
-/* IBM Plex typography, preserving native Kanboard sizing and layout. */
-html, body, button, input, select, textarea, label {
-  font-family: 'IBM Plex Sans', system-ui, sans-serif !important;
-}
-code, pre, kbd, samp,
-.task-board-header > .dropdown > a,
-.task-board-header > .dropdown > a strong,
-.task-board .task-priority,
-.task-board .task-icon-age,
-.task-board .task-icon-age span {
-  font-family: 'IBM Plex Mono', ui-monospace, monospace !important;
-}
-
-/* Hover feedback: brighten border without changing native card geometry. */
-#board .task-board { transition: box-shadow 120ms ease, filter 120ms ease; }
-#board .task-board:hover { filter: brightness(1.025); box-shadow: 0 2px 7px rgba(20,35,50,.15); }
-@media (prefers-reduced-motion: reduce) { #board .task-board { transition: none; } }
-
-/* Explicit column IDs: reliable across swimlanes and project boards. */
-/* Backlog */
-#board .task-board[data-column-id="26"],
-#board .task-board[data-column-id="11"],
-#board .task-board[data-column-id="21"],
-#board .task-board[data-column-id="6"],
-#board .task-board[data-column-id="16"],
-#board .task-board[data-column-id="1"] {
-  background-color: #e8edf2 !important;
-  border-color: #9aa8b6 !important;
-}
-#board th.board-column-header-26,
-#board th.board-column-header-11,
-#board th.board-column-header-21,
-#board th.board-column-header-6,
-#board th.board-column-header-16,
-#board th.board-column-header-1 { border-bottom: 3px solid #9aa8b6 !important; }
-
-/* Ready */
-#board .task-board[data-column-id="27"],
-#board .task-board[data-column-id="12"],
-#board .task-board[data-column-id="22"],
-#board .task-board[data-column-id="7"],
-#board .task-board[data-column-id="17"],
-#board .task-board[data-column-id="2"] {
-  background-color: #dceeff !important;
-  border-color: #4b9be7 !important;
-}
-#board th.board-column-header-27,
-#board th.board-column-header-12,
-#board th.board-column-header-22,
-#board th.board-column-header-7,
-#board th.board-column-header-17,
-#board th.board-column-header-2 { border-bottom: 3px solid #4b9be7 !important; }
-
-/* WIP */
-#board .task-board[data-column-id="28"],
-#board .task-board[data-column-id="13"],
-#board .task-board[data-column-id="23"],
-#board .task-board[data-column-id="8"],
-#board .task-board[data-column-id="18"],
-#board .task-board[data-column-id="3"] {
-  background-color: #fff0d6 !important;
-  border-color: #e7a13c !important;
-}
-#board th.board-column-header-28,
-#board th.board-column-header-13,
-#board th.board-column-header-23,
-#board th.board-column-header-8,
-#board th.board-column-header-18,
-#board th.board-column-header-3 { border-bottom: 3px solid #e7a13c !important; }
-
-/* Blocked */
-#board .task-board[data-column-id="29"],
-#board .task-board[data-column-id="14"],
-#board .task-board[data-column-id="24"],
-#board .task-board[data-column-id="9"],
-#board .task-board[data-column-id="19"],
-#board .task-board[data-column-id="4"] {
-  background-color: #ffe0e0 !important;
-  border-color: #dc6262 !important;
-}
-#board th.board-column-header-29,
-#board th.board-column-header-14,
-#board th.board-column-header-24,
-#board th.board-column-header-9,
-#board th.board-column-header-19,
-#board th.board-column-header-4 { border-bottom: 3px solid #dc6262 !important; }
-
-/* Done */
-#board .task-board[data-column-id="30"],
-#board .task-board[data-column-id="15"],
-#board .task-board[data-column-id="25"],
-#board .task-board[data-column-id="10"],
-#board .task-board[data-column-id="20"],
-#board .task-board[data-column-id="5"] {
-  background-color: #def3e4 !important;
-  border-color: #48a56a !important;
-}
-#board th.board-column-header-30,
-#board th.board-column-header-15,
-#board th.board-column-header-25,
-#board th.board-column-header-10,
-#board th.board-column-header-20,
-#board th.board-column-header-5 { border-bottom: 3px solid #48a56a !important; }
-
-/* Stock Kanboard cards are 1px; recent cards otherwise become 2px.
-   Keep a consistent solid 1px border for all workflow-colored cards. */
-#board .task-board,
-#board div.task-board-recent,
-#board div.task-board-status-closed {
-  border-width: 1px !important;
-  border-style: solid !important;
-}
-
-/* Hide the task-only color control in creation/edit forms.
-   Leave unrelated category and tag color pickers unaffected. */
-form:has(#form-title) label[for="form-color_id"],
-form:has(#form-title) #form-color_id,
-form:has(#form-title) #form-color_id + .select2,
-form:has(#form-title) select[name="color_id"] + .select2 {
-  display: none !important;
-}
-
-/* Remove task age and days-in-column badges from board cards only. */
-#board .task-board .task-icon-age { display: none !important; }
-
-/* SubtasksOnBoard: match each parent card background without altering layout. */
-#board .task-board .table-suboncard td:nth-child(1),
-#board .task-board .table-suboncard td:nth-child(2) {
-  background-color: transparent !important;
-}
-
-/* SubtasksOnBoard: align Font Awesome state icons with IBM Plex text. */
-#board .task-board .table-suboncard .subtask-title a {
-  display: inline-flex !important;
-  align-items: baseline;
-  max-width: 100%;
-}
-#board .task-board .table-suboncard .subtask-title i.fa {
-  display: inline-block !important;
-  flex: 0 0 auto;
-  margin: 0 5px 0 0 !important;
-  vertical-align: baseline;
-}
-
-/* Hide unused task Reference field and card badge; retain stored values. */
-#board .task-board .task-board-reference,
-form:has(#form-title) label[for="form-reference"],
-form:has(#form-title) #form-reference {
-  display: none !important;
-}
-
-/* Quiet task IDs on board cards without affecting titles or controls. */
-#board .task-board .task-board-header > a:first-child,
-#board .task-board .task-board-header > .dropdown > a:first-child,
-#board .task-board .task-board-header > .dropdown > a:first-child strong {
-  color: #687583 !important;
-}
-
-/* Unified single-line metadata footer below one divider. */
-#board .task-board .task-board-expanded {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-}
-#board .task-board .task-board-expanded > .task-board-header {
-  display: contents;
-}
-#board .task-board .task-board-expanded > .task-board-icons,
-#board .task-board .task-board-expanded > .task-board-icons .task-board-icons-row {
-  display: contents;
-}
-#board .task-board .task-board-expanded::after {
-  content: "";
-  order: 29;
-  display: block;
-  flex: 0 0 100%;
-  width: 100%;
-  margin-top: 5px;
-  padding-top: 4px;
-  border-top: 1px solid rgba(50, 60, 70, .08);
-}
-#board .task-board .task-board-expanded > .task-board-header .task-board-assignee:not(.task-board-change-assignee) {
-  display: none !important;
-}
-#board .task-board .task-board-expanded > .task-board-header > *,
-#board .task-board .task-board-expanded .task-board-icons-row > * {
-  order: 30;
-  flex: 0 0 auto;
-  width: auto !important;
-  max-width: 100%;
-  align-self: center;
-  margin: 0 5px 0 0 !important;
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
-  line-height: 1.3;
-}
-#board .task-board .task-board-expanded > .task-board-header .task-board-avatars {
-  margin-left: 0 !important;
-}
-#board .task-board .task-board-expanded > .task-board-header .dropdown,
-#board .task-board .task-board-expanded > .task-board-header .dropdown > a,
-#board .task-board .task-board-expanded > .task-board-header > a,
-#board .task-board .task-board-expanded > .task-board-header > strong,
-#board .task-board .task-board-expanded > .task-board-header .task-board-avatars,
-#board .task-board .task-board-expanded .task-board-icons-row .task-subtask-progress,
-#board .task-board .task-board-expanded .task-board-icons-row .task-priority,
-#board .task-board .task-board-expanded .task-board-icons-row .task-score,
-#board .task-board .task-board-expanded .task-board-icons-row > a,
-#board .task-board .task-board-expanded .task-board-icons-row > span {
-  color: #8a929b !important;
-}
-#board .task-board .task-board-expanded > .task-board-header .dropdown,
-#board .task-board .task-board-expanded > .task-board-header .dropdown > a,
-#board .task-board .task-board-expanded > .task-board-header > a {
-  font-size: 12px;
-}
-
-
-/* Footer control order: ID, edit | progress, description, priority | assignee. */
-#board .task-board .task-board-expanded > .task-board-header .dropdown {
-  order: 1 !important;
-  margin-right: 0 !important;
-  color: #8a929b !important;
-}
-#board .task-board .task-board-expanded > .task-board-header a:has(i.fa-edit),
-#board .task-board .task-board-expanded > .task-board-header a:has(i.fa-pencil),
-#board .task-board .task-board-expanded > .task-board-header a.js-modal-large {
-  order: 2 !important;
-  color: #8a929b !important;
-  margin-right: 0 !important;
-}
-#board .task-board .task-board-expanded .task-board-icons-row a[href*="action=subtasks"] {
-  order: 10 !important;
-  margin-left: auto !important;
-  margin-right: 5px !important;
-  color: #8a929b !important;
-}
-#board .task-board .task-board-expanded .task-board-icons-row a[href*="action=description"] {
-  order: 11 !important;
-  margin-right: 5px !important;
-  color: #8a929b !important;
-}
-#board .task-board .task-board-expanded .task-board-icons-row .task-priority {
-  order: 12 !important;
-  margin-right: 0 !important;
-  color: #8a929b !important;
-}
-#board .task-board .task-board-expanded > .task-board-header .task-board-avatars {
-  order: 20 !important;
-  margin-left: auto !important;
-  margin-right: 0 !important;
-}
-#board .task-board .task-board-expanded > .task-board-header .dropdown strong,
-#board .task-board .task-board-expanded > .task-board-header .dropdown strong i,
-#board .task-board .task-board-expanded > .task-board-header a:has(i.fa-edit),
-#board .task-board .task-board-expanded > .task-board-header a:has(i.fa-pencil),
-#board .task-board .task-board-expanded > .task-board-header a.js-modal-large {
-  color: #8a929b !important;
-}
-
-
-/* Final card footer: one left-aligned metadata group, avatar pinned right. */
-#board .task-board .task-board-expanded {
-  display: flex !important;
-  flex-direction: row !important;
-  flex-wrap: wrap !important;
-  align-items: center !important;
-}
-#board .task-board .task-board-expanded > .task-board-header {
-  display: contents !important;
-}
-#board .task-board .task-board-expanded > .task-board-icons,
-#board .task-board .task-board-expanded > .task-board-icons .task-board-icons-row {
-  display: contents !important;
-}
-#board .task-board .task-board-expanded::after {
-  content: "";
-  order: 0 !important;
-  display: block !important;
-  flex: 0 0 100% !important;
-  width: 100% !important;
-  margin: 5px 0 4px !important;
-  padding: 0 !important;
-  border-top: 1px solid rgba(50, 60, 70, .08) !important;
-}
-#board .task-board .task-board-expanded > .task-board-header .dropdown,
-#board .task-board .task-board-expanded > .task-board-header .dropdown > a,
-#board .task-board .task-board-expanded > .task-board-header .dropdown > a strong,
-#board .task-board .task-board-expanded > .task-board-header .dropdown > a strong i,
-#board .task-board .task-board-expanded > .task-board-header > a,
-#board .task-board .task-board-expanded > .task-board-header > a i,
-#board .task-board .task-board-expanded > .task-board-header > strong {
-  color: #aeb5bc !important;
-}
-#board .task-board .task-board-expanded > .task-board-header .task-board-assignee:not(.task-board-change-assignee) {
-  display: none !important;
-}
-#board .task-board .task-board-expanded > .task-board-header > *,
-#board .task-board .task-board-expanded .task-board-icons-row > * {
-  order: 1 !important;
-  flex: 0 0 auto !important;
-  width: auto !important;
-  max-width: 100% !important;
-  margin: 0 5px 0 0 !important;
-  padding: 0 !important;
-  align-self: center !important;
-  line-height: 1.3 !important;
-}
-#board .task-board .task-board-expanded .task-board-icons-row a[href*="action=subtasks"] {
-  margin-left: 0 !important;
-  color: #aeb5bc !important;
-}
-#board .task-board .task-board-expanded .task-board-icons-row a[href*="action=description"] {
-  color: #aeb5bc !important;
-}
-#board .task-board .task-board-expanded .task-board-icons-row .task-priority,
-#board .task-board .task-board-expanded .task-board-icons-row .task-score,
-#board .task-board .task-board-expanded .task-board-icons-row > a,
-#board .task-board .task-board-expanded .task-board-icons-row > span {
-  color: #aeb5bc !important;
-}
-#board .task-board .task-board-expanded > .task-board-header .task-board-avatars {
-  order: 2 !important;
-  display: block !important;
-  flex: 0 0 auto !important;
-  margin-left: auto !important;
-  margin-right: 0 !important;
-}
-
-
-/* Explicit final footer order: ID, edit, description, progress, priority, avatar. */
-#board .task-board .task-board-expanded > .task-board-header .dropdown { order: 1 !important; color: #8a929b !important; }
-#board .task-board .task-board-expanded > .task-board-header .dropdown a,
-#board .task-board .task-board-expanded > .task-board-header .dropdown strong,
-#board .task-board .task-board-expanded > .task-board-header .dropdown i { color: #8a929b !important; }
-#board .task-board .task-board-expanded > .task-board-header a.js-modal-large { order: 2 !important; color: #8a929b !important; }
-#board .task-board .task-board-expanded .task-board-icons-row a:has(i.fa-file-text-o) { order: 3 !important; color: #8a929b !important; }
-#board .task-board .task-board-expanded .task-board-icons-row a:has(i.fa-bars) { order: 4 !important; color: #8a929b !important; margin-left: 0 !important; }
-#board .task-board .task-board-expanded .task-board-icons-row .task-priority { order: 5 !important; color: #8a929b !important; }
-#board .task-board .task-board-expanded > .task-board-header .task-board-avatars { order: 6 !important; margin-left: auto !important; margin-right: 0 !important; }
-#board .task-board .task-board-expanded > .task-board-header a,
-#board .task-board .task-board-expanded > .task-board-header a i,
-#board .task-board .task-board-expanded .task-board-icons-row,
-#board .task-board .task-board-expanded .task-board-icons-row a,
-#board .task-board .task-board-expanded .task-board-icons-row a i,
-#board .task-board .task-board-expanded .task-board-icons-row span,
-#board .task-board .task-board-expanded .task-board-icons-row .task-priority {
-  color: #8a929b !important;
-}
-
-
-/* Final footer color consistency: all non-user controls match task ID/edit. */
-#board .task-board .task-board-expanded .task-board-icons-row,
-#board .task-board .task-board-expanded .task-board-icons-row a,
-#board .task-board .task-board-expanded .task-board-icons-row a i,
-#board .task-board .task-board-expanded .task-board-icons-row span,
-#board .task-board .task-board-expanded .task-board-icons-row .task-priority,
-#board .task-board .task-board-expanded .task-board-icons-row .task-score,
-#board .task-board .task-board-expanded .task-board-header .dropdown,
-#board .task-board .task-board-expanded .task-board-header .dropdown a,
-#board .task-board .task-board-expanded .task-board-header .dropdown strong,
-#board .task-board .task-board-expanded .task-board-header .dropdown i,
-#board .task-board .task-board-expanded .task-board-header a.js-modal-large,
-#board .task-board .task-board-expanded .task-board-header a.js-modal-large i {
-  color: #8a929b !important;
-}
-/* Description icon is intentionally omitted from the card footer. */
-#board .task-board .task-board-expanded .task-board-icons-row a:has(i.fa-file-text-o) {
-  display: none !important;
-}
-
-
-/* Modern Kanboard pass: neutral surfaces, softer status tints, clearer hierarchy. */
-:root {
-  --kb-canvas: #f6f7f9;
-  --kb-surface: #ffffff;
-  --kb-border: #dfe3e8;
   --kb-text: #202833;
   --kb-muted: #8a929b;
-  --kb-radius: 8px;
+  --kb-border: #dfe3e8;
+  --kb-canvas: #f6f7f9;
+  --kb-surface: #ffffff;
+  --kb-backlog: #6B7280;
+  --kb-backlog-bg: #EEF0F3;
+  --kb-ready: #3B82F6;
+  --kb-ready-bg: #E8F1FF;
+  --kb-progress: #F59E0B;
+  --kb-progress-bg: #FFF3D9;
+  --kb-blocked: #EF4444;
+  --kb-blocked-bg: #FDE8E8;
+  --kb-done: #10B981;
+  --kb-done-bg: #E2F7EF;
 }
-html, body {
-  background: var(--kb-canvas) !important;
+
+html, body, button, input, select, textarea, label {
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
   color: var(--kb-text);
 }
-#board {
-  background: transparent !important;
+code, pre, kbd, samp {
+  font-family: ui-monospace, 'SFMono-Regular', Consolas, monospace !important;
 }
-#board table,
-#board tbody,
-#board tr {
-  background: transparent;
-}
+html, body { background: var(--kb-canvas); }
+.btn, button, input, select, textarea, .form-control { border-radius: 6px; }
+
+/* Quiet, consistent workspace and column surfaces. */
+#board { background: transparent !important; }
 #board th.board-column-header {
   background: #f8f9fb !important;
   border-top: 1px solid #e6e9ee !important;
@@ -423,181 +44,163 @@ html, body {
   border-left: 1px solid #e7eaee !important;
   border-right: 1px solid #e7eaee !important;
 }
+
+/* Option A workflow palette. IDs cover the board columns used across projects. */
+#board .task-board[data-column-id="26"], #board .task-board[data-column-id="11"], #board .task-board[data-column-id="21"], #board .task-board[data-column-id="6"], #board .task-board[data-column-id="16"], #board .task-board[data-column-id="1"] {
+  background: var(--kb-backlog-bg) !important; border: 1px solid var(--kb-backlog) !important;
+}
+#board th.board-column-header-26, #board th.board-column-header-11, #board th.board-column-header-21, #board th.board-column-header-6, #board th.board-column-header-16, #board th.board-column-header-1 { border-bottom: 3px solid var(--kb-backlog) !important; }
+
+#board .task-board[data-column-id="27"], #board .task-board[data-column-id="12"], #board .task-board[data-column-id="22"], #board .task-board[data-column-id="7"], #board .task-board[data-column-id="17"], #board .task-board[data-column-id="2"] {
+  background: var(--kb-ready-bg) !important; border: 1px solid var(--kb-ready) !important;
+}
+#board th.board-column-header-27, #board th.board-column-header-12, #board th.board-column-header-22, #board th.board-column-header-7, #board th.board-column-header-17, #board th.board-column-header-2 { border-bottom: 3px solid var(--kb-ready) !important; }
+
+#board .task-board[data-column-id="28"], #board .task-board[data-column-id="13"], #board .task-board[data-column-id="23"], #board .task-board[data-column-id="8"], #board .task-board[data-column-id="18"], #board .task-board[data-column-id="3"] {
+  background: var(--kb-progress-bg) !important; border: 1px solid var(--kb-progress) !important;
+}
+#board th.board-column-header-28, #board th.board-column-header-13, #board th.board-column-header-23, #board th.board-column-header-8, #board th.board-column-header-18, #board th.board-column-header-3 { border-bottom: 3px solid var(--kb-progress) !important; }
+
+#board .task-board[data-column-id="29"], #board .task-board[data-column-id="14"], #board .task-board[data-column-id="24"], #board .task-board[data-column-id="9"], #board .task-board[data-column-id="19"], #board .task-board[data-column-id="4"] {
+  background: var(--kb-blocked-bg) !important; border: 1px solid var(--kb-blocked) !important;
+}
+#board th.board-column-header-29, #board th.board-column-header-14, #board th.board-column-header-24, #board th.board-column-header-9, #board th.board-column-header-19, #board th.board-column-header-4 { border-bottom: 3px solid var(--kb-blocked) !important; }
+
+#board .task-board[data-column-id="30"], #board .task-board[data-column-id="15"], #board .task-board[data-column-id="25"], #board .task-board[data-column-id="10"], #board .task-board[data-column-id="20"], #board .task-board[data-column-id="5"] {
+  background: var(--kb-done-bg) !important; border: 1px solid var(--kb-done) !important;
+}
+#board th.board-column-header-30, #board th.board-column-header-15, #board th.board-column-header-25, #board th.board-column-header-10, #board th.board-column-header-20, #board th.board-column-header-5 { border-bottom: 3px solid var(--kb-done) !important; }
+
+/* Card shape, title hierarchy, and restrained hover feedback. */
 #board .task-board {
-  border-radius: var(--kb-radius) !important;
-  box-shadow: 0 1px 2px rgba(20, 30, 45, .04);
   color: var(--kb-text);
+  border-radius: 8px !important;
   padding: 8px !important;
   margin: 6px 4px !important;
+  box-shadow: 0 1px 2px rgba(20, 30, 45, .04);
+  transition: box-shadow 120ms ease, transform 120ms ease;
 }
 #board .task-board:hover {
-  filter: none !important;
   box-shadow: 0 3px 10px rgba(20, 30, 45, .09) !important;
   transform: translateY(-1px);
 }
 #board .task-board .task-board-title {
   color: var(--kb-text);
-  font-weight: 500;
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  font-weight: 600;
   line-height: 1.4;
 }
+@media (prefers-reduced-motion: reduce) {
+  #board .task-board { transition: none; }
+}
+
+/* SubtasksOnBoard: retain checklists, remove the thick spacer-bar appearance. */
 #board .task-board .table-suboncard {
-  border-top-color: rgba(40, 52, 68, .10) !important;
+  margin-top: 5px !important;
+  border-top: 1px solid rgba(40, 52, 68, .08) !important;
+  border-bottom: 0 !important;
+  background: transparent !important;
 }
 #board .task-board .table-suboncard td {
+  background: transparent !important;
   border-color: rgba(40, 52, 68, .07) !important;
+  color: var(--kb-text);
+  vertical-align: top;
 }
-#board th.board-column-header-26,
-#board th.board-column-header-11,
-#board th.board-column-header-21,
-#board th.board-column-header-6,
-#board th.board-column-header-16,
-#board th.board-column-header-1 { border-bottom-width: 2px !important; }
-#board th.board-column-header-27,
-#board th.board-column-header-12,
-#board th.board-column-header-22,
-#board th.board-column-header-7,
-#board th.board-column-header-17,
-#board th.board-column-header-2 { border-bottom-width: 2px !important; }
-#board th.board-column-header-28,
-#board th.board-column-header-13,
-#board th.board-column-header-23,
-#board th.board-column-header-8,
-#board th.board-column-header-18,
-#board th.board-column-header-3 { border-bottom-width: 2px !important; }
-#board th.board-column-header-29,
-#board th.board-column-header-14,
-#board th.board-column-header-24,
-#board th.board-column-header-9,
-#board th.board-column-header-19,
-#board th.board-column-header-4 { border-bottom-width: 2px !important; }
-#board th.board-column-header-30,
-#board th.board-column-header-15,
-#board th.board-column-header-25,
-#board th.board-column-header-10,
-#board th.board-column-header-20,
-#board th.board-column-header-5 { border-bottom-width: 2px !important; }
-.btn, button, input, select, textarea, .form-control {
-  border-radius: 6px;
+#board .task-board .table-suboncard .subtask-title a {
+  color: var(--kb-text);
+  text-decoration: none;
+}
+#board .task-board .table-suboncard input[type="checkbox"] {
+  margin: 2px 5px 0 0;
+  vertical-align: top;
 }
 
+/* Keep the card footer on one line below a single divider. */
+#board .task-board .task-board-expanded {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+}
+#board .task-board .task-board-expanded > .task-board-header,
+#board .task-board .task-board-expanded > .task-board-icons,
+#board .task-board .task-board-expanded > .task-board-icons .task-board-icons-row {
+  display: contents !important;
+}
+#board .task-board .task-board-expanded::after {
+  content: "";
+  order: 0;
+  display: block;
+  flex: 0 0 100%;
+  width: 100%;
+  margin: 5px 0 4px;
+  border-top: 1px solid rgba(50, 60, 70, .08);
+}
+#board .task-board .task-board-header .dropdown > a.dropdown-menu-link-icon {
+  order: 1 !important;
+  color: var(--kb-muted) !important;
+}
+#board .task-board .task-board-header a.js-modal-large {
+  order: 2 !important;
+  color: var(--kb-muted) !important;
+  margin: 0 5px 0 0 !important;
+}
+#board .task-board .task-board-icons .task-board-icons-row {
+  display: contents !important;
+}
+#board .task-board .task-board-icons a[href*="action=subtasks"] {
+  order: 3 !important;
+  margin: 0 5px 0 0 !important;
+  color: var(--kb-muted) !important;
+}
+#board .task-board .task-board-icons .task-priority {
+  order: 4 !important;
+  color: var(--kb-muted) !important;
+  margin: 0 5px 0 0 !important;
+}
+#board .task-board .task-board-header .task-board-avatars {
+  order: 5 !important;
+  margin-left: auto !important;
+  margin-right: 0 !important;
+}
+#board .task-board .task-board-header .task-board-assignee { display: none !important; }
 
-/* Modern typography: Inter for the interface, monospace only for code. */
-500;600;700&display=swap');
-html, body, button, input, select, textarea, label,
-#board, #board .task-board, #board .task-board-title,
-#board .table-suboncard, #board .table-suboncard td,
-#board .table-suboncard a {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
-}
-code, pre, kbd, samp {
-  font-family: 'IBM Plex Mono', ui-monospace, monospace !important;
-}
-/* TaskProgressBar: replace the chunky default bar with a slim modern track. */
-#board .container-task-progress-bar {
-  height: 4px !important;
-  min-height: 4px !important;
-  margin: 5px 0 6px !important;
-  padding: 0 !important;
-  background: rgba(43, 55, 72, .12) !important;
-  border: 0 !important;
-  border-radius: 999px !important;
-  overflow: hidden !important;
-}
-#board .container-task-progress-bar .task-progress-bar {
-  height: 4px !important;
-  min-height: 4px !important;
-  padding: 0 !important;
-  background: #8a929b !important;
-  border-radius: 999px !important;
-  transition: width 160ms ease;
-}
-#board .container-task-progress-bar .task-progress-bar span {
+/* Hide only the description tooltip control; task descriptions remain accessible. */
+#board .task-board .task-board-icons a[href*="action=description"],
+#board .task-board .task-board-icons a[href*="description"] {
   display: none !important;
 }
-@media (prefers-reduced-motion: reduce) {
-  #board .container-task-progress-bar .task-progress-bar { transition: none; }
+
+/* All non-avatar footer indicators share the same muted gray. */
+#board .task-board .task-board-header .dropdown > a,
+#board .task-board .task-board-header .dropdown > a *,
+#board .task-board .task-board-header a.js-modal-large,
+#board .task-board .task-board-header a.js-modal-large *,
+#board .task-board .task-board-icons,
+#board .task-board .task-board-icons a,
+#board .task-board .task-board-icons a *,
+#board .task-board .task-board-icons span,
+#board .task-board .task-priority {
+  color: var(--kb-muted) !important;
 }
 
-
-/* Correction: SubtasksOnBoard's spacer is a 12px transparent table border.
-   Keep the spacing, but never tint it into a fake progress bar. */
-#board .task-board .table-suboncard {
-  border-top-color: transparent !important;
-  border-bottom-color: transparent !important;
-  background: transparent !important;
-}
-#board .task-board .table-suboncard td,
-#board .task-board .table-suboncard td:nth-child(1),
-#board .task-board .table-suboncard td:nth-child(2) {
-  background-color: transparent !important;
-}
-/* This setup does not use TaskProgressBar: do not style or display its markup. */
-#board .container-task-progress-bar {
+/* Keep task cards consistent and remove unused metadata from board view. */
+#board .task-board .task-icon-age,
+#board .task-board .task-board-reference,
+#board .task-board .task-icon-age-total,
+#board .task-board .task-icon-age-column {
   display: none !important;
 }
-/* Typography direction: Manrope for a more contemporary, humanist SaaS UI.
-   Keep monospace restricted to code and preformatted technical content. */
-500;600;700&display=swap');
-html, body, button, input, select, textarea, label,
-#board, #board .task-board, #board .task-board-title,
-#board .table-suboncard, #board .table-suboncard td,
-#board .table-suboncard a {
-  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
-}
-code, pre, kbd, samp {
-  font-family: ui-monospace, 'SFMono-Regular', Consolas, monospace !important;
-}
-
-
-/* SubtasksOnBoard: remove its thick top spacer, which appears as a stray gray bar. */
-#board .task-board .table-suboncard {
-  border-top: 0 !important;
-  border-top-width: 0 !important;
-  border-top-style: none !important;
-  border-top-color: transparent !important;
-  margin-top: 4px !important;
-  padding-top: 0 !important;
-  background: transparent !important;
-}
-#board .task-board .table-suboncard td,
-#board .task-board .table-suboncard td:nth-child(1),
-#board .task-board .table-suboncard td:nth-child(2) {
-  background: transparent !important;
-}
-/* Remove the earlier mistaken TaskProgressBar styling; this setup does not use it. */
-#board .container-task-progress-bar,
-#board .container-task-progress-bar .task-progress-bar {
+/* Reference remains stored on tasks; only its board badge is hidden. */
+form:has(#form-title) label[for="form-reference"],
+form:has(#form-title) #form-reference,
+form:has(#form-title) .form-reference {
   display: none !important;
 }
-/* Use Manrope for the UI, with system fallbacks. Monospace is code-only. */
-500;600;700&display=swap');
-html, body, button, input, select, textarea, label,
-#board, #board .task-board, #board .task-board-title,
-#board .table-suboncard, #board .table-suboncard td,
-#board .table-suboncard a {
-  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+/* Hide task-color editing in task forms, without affecting tags/categories. */
+form:has(#form-title) label[for="form-color_id"],
+form:has(#form-title) #form-color_id,
+form:has(#form-title) .form-color_id {
+  display: none !important;
 }
-code, pre, kbd, samp {
-  font-family: ui-monospace, 'SFMono-Regular', Consolas, monospace !important;
-}
-
-
-/* Option A modern workflow palette */
-#board .task-board[data-column-id="26"], #board .task-board[data-column-id="11"], #board .task-board[data-column-id="21"], #board .task-board[data-column-id="6"], #board .task-board[data-column-id="16"], #board .task-board[data-column-id="1"] { background-color:#EEF0F3 !important; border-color:#6B7280 !important; }
-#board th.board-column-header-26, #board th.board-column-header-11, #board th.board-column-header-21, #board th.board-column-header-6, #board th.board-column-header-16, #board th.board-column-header-1 { border-bottom:3px solid #6B7280 !important; }
-#board .task-board[data-column-id="27"], #board .task-board[data-column-id="12"], #board .task-board[data-column-id="22"], #board .task-board[data-column-id="7"], #board .task-board[data-column-id="17"], #board .task-board[data-column-id="2"] { background-color:#E8F1FF !important; border-color:#3B82F6 !important; }
-#board th.board-column-header-27, #board th.board-column-header-12, #board th.board-column-header-22, #board th.board-column-header-7, #board th.board-column-header-17, #board th.board-column-header-2 { border-bottom:3px solid #3B82F6 !important; }
-#board .task-board[data-column-id="28"], #board .task-board[data-column-id="13"], #board .task-board[data-column-id="23"], #board .task-board[data-column-id="8"], #board .task-board[data-column-id="18"], #board .task-board[data-column-id="3"] { background-color:#FFF3D9 !important; border-color:#F59E0B !important; }
-#board th.board-column-header-28, #board th.board-column-header-13, #board th.board-column-header-23, #board th.board-column-header-8, #board th.board-column-header-18, #board th.board-column-header-3 { border-bottom:3px solid #F59E0B !important; }
-#board .task-board[data-column-id="29"], #board .task-board[data-column-id="14"], #board .task-board[data-column-id="24"], #board .task-board[data-column-id="9"], #board .task-board[data-column-id="19"], #board .task-board[data-column-id="4"] { background-color:#FDE8E8 !important; border-color:#EF4444 !important; }
-#board th.board-column-header-29, #board th.board-column-header-14, #board th.board-column-header-24, #board th.board-column-header-9, #board th.board-column-header-19, #board th.board-column-header-4 { border-bottom:3px solid #EF4444 !important; }
-#board .task-board[data-column-id="30"], #board .task-board[data-column-id="15"], #board .task-board[data-column-id="25"], #board .task-board[data-column-id="10"], #board .task-board[data-column-id="20"], #board .task-board[data-column-id="5"] { background-color:#E2F7EF !important; border-color:#10B981 !important; }
-#board th.board-column-header-30, #board th.board-column-header-15, #board th.board-column-header-25, #board th.board-column-header-10, #board th.board-column-header-20, #board th.board-column-header-5 { border-bottom:3px solid #10B981 !important; }
-
-/* Hide only the description tooltip control, not the task description itself. */
-#board .task-board .task-board-icons a:has(i.fa-file-text-o) { display:none !important; }
-
-/* Footer order: task ID/dropdown first, edit immediately after. */
-#board .task-board .task-board-expanded > .task-board-header .dropdown { order:1 !important; }
-#board .task-board .task-board-expanded > .task-board-header a.js-modal-large { order:2 !important; }
-#board .task-board .task-board-expanded > .task-board-header .task-board-avatars { margin-left:auto !important; }
