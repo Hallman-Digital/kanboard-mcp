@@ -183,9 +183,9 @@ form:has(#form-title) #form-reference {
   display: flex;
   align-items: center;
   gap: 6px;
-  margin-top: 8px;
-  padding-top: 6px;
-  border-top: 1px solid rgba(50, 60, 70, .14);
+  margin-top: 5px;
+  padding-top: 4px;
+  border-top: 1px solid rgba(50, 60, 70, .08);
 }
 #board .task-board .task-board-expanded > .task-board-header .task-board-assignee:not(.task-board-change-assignee) {
   display: none !important;
