@@ -172,3 +172,24 @@ form:has(#form-title) #form-reference {
 #board .task-board .task-board-header > .dropdown > a:first-child strong {
   color: #687583 !important;
 }
+
+/* Card metadata footer: apply flex to Kanboard's actual inner card wrapper. */
+#board .task-board .task-board-expanded {
+  display: flex;
+  flex-direction: column;
+}
+#board .task-board .task-board-expanded > .task-board-header {
+  order: 20;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(50, 60, 70, .14);
+}
+#board .task-board .task-board-expanded > .task-board-header .task-board-assignee:not(.task-board-change-assignee) {
+  display: none !important;
+}
+#board .task-board .task-board-expanded > .task-board-header .task-board-avatars {
+  margin-left: auto;
+}
