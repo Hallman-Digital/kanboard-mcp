@@ -190,7 +190,7 @@ html, body { background: var(--kb-canvas); }
   order: 7 !important;
   color: var(--kb-muted) !important;
 }
-#board .task-board .task-board-header .task-board-assignee { display: none !important; }
+#board .task-board .task-board-header > .task-board-assignee { display: none !important; }
 #board .task-board .task-board-header .task-board-avatars {
   order: 8 !important;
   margin-left: auto !important;
@@ -199,8 +199,10 @@ html, body { background: var(--kb-canvas); }
 
 /* Hide the description tooltip link by its icon and action URL. */
 #board .task-board .task-board-icons a[href*="description"],
+#board .task-board .task-board-icons a[href*="BoardTooltipController"][href*="description"],
 #board .task-board .task-board-icons a:has(i.fa-file-text-o),
-#board .task-board .task-board-icons a:has(i[class~="fa-file-text-o"]) {
+#board .task-board .task-board-icons a:has(i[class~="fa-file-text-o"]),
+#board .task-board .task-board-icons i.fa-file-text-o {
   display: none !important;
 }
 
@@ -232,3 +234,12 @@ form:has(#form-title) #form-color_id,
 form:has(#form-title) .form-color_id {
   display: none !important;
 }
+
+/* Final targeted fixes: preserve the avatar and suppress the description-tooltip icon. */
+#board .task-board .task-board-header > .task-board-assignee { display: none !important; }
+#board .task-board .task-board-header .task-board-avatars,
+#board .task-board .task-board-header .task-board-avatars .task-board-assignee,
+#board .task-board .task-board-header .task-board-avatars img { display: inline-flex !important; visibility: visible !important; opacity: 1 !important; }
+#board .task-board .task-board-icons a[href*="description"],
+#board .task-board .task-board-icons a:has(i.fa-file-text-o),
+#board .task-board .task-board-icons i.fa-file-text-o { display: none !important; }
