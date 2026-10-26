@@ -173,16 +173,28 @@ form:has(#form-title) #form-reference {
   color: #687583 !important;
 }
 
-/* Card metadata footer: apply flex to Kanboard's actual inner card wrapper. */
+/* Unified single-line metadata footer below one divider. */
 #board .task-board .task-board-expanded {
   display: flex;
   flex-direction: column;
 }
+#board .task-board .task-board-expanded > .task-board-header,
+#board .task-board .task-board-expanded > .task-board-icons {
+  order: 30;
+}
 #board .task-board .task-board-expanded > .task-board-header {
-  order: 20;
-  display: flex;
-  align-items: center;
-  gap: 6px;
+  display: contents;
+}
+#board .task-board .task-board-expanded > .task-board-icons,
+#board .task-board .task-board-expanded > .task-board-icons .task-board-icons-row {
+  display: contents;
+}
+#board .task-board .task-board-expanded::after {
+  content: "";
+  order: 29;
+  display: block;
+  flex: 0 0 100%;
+  width: 100%;
   margin-top: 5px;
   padding-top: 4px;
   border-top: 1px solid rgba(50, 60, 70, .08);
@@ -192,4 +204,11 @@ form:has(#form-title) #form-reference {
 }
 #board .task-board .task-board-expanded > .task-board-header .task-board-avatars {
   margin-left: auto;
+}
+#board .task-board .task-board-expanded > .task-board-header > *,
+#board .task-board .task-board-expanded .task-board-icons-row > * {
+  order: 30;
+  align-self: center;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
 }
