@@ -94,11 +94,10 @@ html, body { background: var(--kb-canvas); }
   #board .task-board { transition: none; }
 }
 
-/* SubtasksOnBoard: retain checklists, remove the thick spacer-bar appearance. */
+/* SubtasksOnBoard: keep checklist rows clean, with no stray rule above the first item. */
 #board .task-board .table-suboncard {
   margin-top: 5px !important;
-  border-top: 1px solid rgba(40, 52, 68, .08) !important;
-  border-bottom: 0 !important;
+  border: 0 !important;
   background: transparent !important;
 }
 #board .task-board .table-suboncard td {
@@ -116,7 +115,7 @@ html, body { background: var(--kb-canvas); }
   vertical-align: top;
 }
 
-/* Keep the card footer on one line below a single divider. */
+/* Card content stays in natural order. Only flatten the metadata wrappers. */
 #board .task-board .task-board-expanded {
   display: flex !important;
   flex-direction: row !important;
@@ -125,62 +124,66 @@ html, body { background: var(--kb-canvas); }
 }
 #board .task-board .task-board-expanded > .task-board-header,
 #board .task-board .task-board-expanded > .task-board-icons,
-#board .task-board .task-board-expanded > .task-board-icons .task-board-icons-row {
+#board .task-board .task-board-expanded .task-board-icons-row,
+#board .task-board .task-board-expanded > .task-board-header .dropdown {
   display: contents !important;
 }
+
+/* One divider after the title and subtasks, before all footer controls. */
 #board .task-board .task-board-expanded::after {
   content: "";
-  order: 0;
   display: block;
   flex: 0 0 100%;
   width: 100%;
+  order: 10;
   margin: 5px 0 4px;
   border-top: 1px solid rgba(50, 60, 70, .08);
 }
-#board .task-board .task-board-header .dropdown > a.dropdown-menu-link-icon {
-  order: 1 !important;
+
+/* Footer order: task ID/dropdown, edit, subtask percentage, priority, avatar. */
+#board .task-board .task-board-header a.dropdown-menu-link-icon {
+  order: 11 !important;
   color: var(--kb-muted) !important;
+  margin-right: 5px !important;
 }
 #board .task-board .task-board-header a.js-modal-large {
-  order: 2 !important;
+  order: 12 !important;
   color: var(--kb-muted) !important;
   margin: 0 5px 0 0 !important;
 }
-#board .task-board .task-board-icons .task-board-icons-row {
-  display: contents !important;
-}
-#board .task-board .task-board-icons a[href*="action=subtasks"] {
-  order: 3 !important;
-  margin: 0 5px 0 0 !important;
+#board .task-board .task-board-icons .task-board-icons-row > * {
+  order: 13 !important;
   color: var(--kb-muted) !important;
 }
-#board .task-board .task-board-icons .task-priority {
-  order: 4 !important;
-  color: var(--kb-muted) !important;
-  margin: 0 5px 0 0 !important;
-}
-#board .task-board .task-board-header .task-board-avatars {
-  order: 5 !important;
-  margin-left: auto !important;
-  margin-right: 0 !important;
-}
-#board .task-board .task-board-header .task-board-assignee { display: none !important; }
-
-/* Hide only the description tooltip control; task descriptions remain accessible. */
+#board .task-board .task-board-icons a:has(i.fa-file-text-o),
 #board .task-board .task-board-icons a[href*="action=description"],
 #board .task-board .task-board-icons a[href*="description"] {
   display: none !important;
 }
+#board .task-board .task-board-icons a[href*="action=subtasks"] {
+  order: 13 !important;
+  color: var(--kb-muted) !important;
+  margin-right: 5px !important;
+}
+#board .task-board .task-board-icons .task-priority {
+  order: 14 !important;
+  color: var(--kb-muted) !important;
+  margin-right: 5px !important;
+}
+#board .task-board .task-board-header .task-board-assignee {
+  display: none !important;
+}
+#board .task-board .task-board-header .task-board-avatars {
+  order: 15 !important;
+  margin-left: auto !important;
+  margin-right: 0 !important;
+}
 
-/* All non-avatar footer indicators share the same muted gray. */
-#board .task-board .task-board-header .dropdown > a,
-#board .task-board .task-board-header .dropdown > a *,
-#board .task-board .task-board-header a.js-modal-large,
-#board .task-board .task-board-header a.js-modal-large *,
+/* Match all non-avatar metadata to one consistent muted gray. */
+#board .task-board .task-board-header a,
+#board .task-board .task-board-header a *,
 #board .task-board .task-board-icons,
-#board .task-board .task-board-icons a,
-#board .task-board .task-board-icons a *,
-#board .task-board .task-board-icons span,
+#board .task-board .task-board-icons *,
 #board .task-board .task-priority {
   color: var(--kb-muted) !important;
 }
