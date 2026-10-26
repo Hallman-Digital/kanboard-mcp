@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
 /* Hallman.Digital Kanboard — Minimal branding over native defaults.
    The Customizer logo is managed separately. Keep Kanboard's layout,
    typography, cards, forms, tooltips, and accessibility styles intact. */
@@ -481,7 +482,7 @@ html, body {
 
 
 /* Modern typography: Inter for the interface, monospace only for code. */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+500;600;700&display=swap');
 html, body, button, input, select, textarea, label,
 #board, #board .task-board, #board .task-board-title,
 #board .table-suboncard, #board .table-suboncard td,
@@ -536,7 +537,7 @@ code, pre, kbd, samp {
 }
 /* Typography direction: Manrope for a more contemporary, humanist SaaS UI.
    Keep monospace restricted to code and preformatted technical content. */
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
+500;600;700&display=swap');
 html, body, button, input, select, textarea, label,
 #board, #board .task-board, #board .task-board-title,
 #board .table-suboncard, #board .table-suboncard td,
@@ -569,7 +570,7 @@ code, pre, kbd, samp {
   display: none !important;
 }
 /* Use Manrope for the UI, with system fallbacks. Monospace is code-only. */
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
+500;600;700&display=swap');
 html, body, button, input, select, textarea, label,
 #board, #board .task-board, #board .task-board-title,
 #board .table-suboncard, #board .table-suboncard td,
@@ -579,3 +580,24 @@ html, body, button, input, select, textarea, label,
 code, pre, kbd, samp {
   font-family: ui-monospace, 'SFMono-Regular', Consolas, monospace !important;
 }
+
+
+/* Option A modern workflow palette */
+#board .task-board[data-column-id="26"], #board .task-board[data-column-id="11"], #board .task-board[data-column-id="21"], #board .task-board[data-column-id="6"], #board .task-board[data-column-id="16"], #board .task-board[data-column-id="1"] { background-color:#EEF0F3 !important; border-color:#6B7280 !important; }
+#board th.board-column-header-26, #board th.board-column-header-11, #board th.board-column-header-21, #board th.board-column-header-6, #board th.board-column-header-16, #board th.board-column-header-1 { border-bottom:3px solid #6B7280 !important; }
+#board .task-board[data-column-id="27"], #board .task-board[data-column-id="12"], #board .task-board[data-column-id="22"], #board .task-board[data-column-id="7"], #board .task-board[data-column-id="17"], #board .task-board[data-column-id="2"] { background-color:#E8F1FF !important; border-color:#3B82F6 !important; }
+#board th.board-column-header-27, #board th.board-column-header-12, #board th.board-column-header-22, #board th.board-column-header-7, #board th.board-column-header-17, #board th.board-column-header-2 { border-bottom:3px solid #3B82F6 !important; }
+#board .task-board[data-column-id="28"], #board .task-board[data-column-id="13"], #board .task-board[data-column-id="23"], #board .task-board[data-column-id="8"], #board .task-board[data-column-id="18"], #board .task-board[data-column-id="3"] { background-color:#FFF3D9 !important; border-color:#F59E0B !important; }
+#board th.board-column-header-28, #board th.board-column-header-13, #board th.board-column-header-23, #board th.board-column-header-8, #board th.board-column-header-18, #board th.board-column-header-3 { border-bottom:3px solid #F59E0B !important; }
+#board .task-board[data-column-id="29"], #board .task-board[data-column-id="14"], #board .task-board[data-column-id="24"], #board .task-board[data-column-id="9"], #board .task-board[data-column-id="19"], #board .task-board[data-column-id="4"] { background-color:#FDE8E8 !important; border-color:#EF4444 !important; }
+#board th.board-column-header-29, #board th.board-column-header-14, #board th.board-column-header-24, #board th.board-column-header-9, #board th.board-column-header-19, #board th.board-column-header-4 { border-bottom:3px solid #EF4444 !important; }
+#board .task-board[data-column-id="30"], #board .task-board[data-column-id="15"], #board .task-board[data-column-id="25"], #board .task-board[data-column-id="10"], #board .task-board[data-column-id="20"], #board .task-board[data-column-id="5"] { background-color:#E2F7EF !important; border-color:#10B981 !important; }
+#board th.board-column-header-30, #board th.board-column-header-15, #board th.board-column-header-25, #board th.board-column-header-10, #board th.board-column-header-20, #board th.board-column-header-5 { border-bottom:3px solid #10B981 !important; }
+
+/* Hide only the description tooltip control, not the task description itself. */
+#board .task-board .task-board-icons a:has(i.fa-file-text-o) { display:none !important; }
+
+/* Footer order: task ID/dropdown first, edit immediately after. */
+#board .task-board .task-board-expanded > .task-board-header .dropdown { order:1 !important; }
+#board .task-board .task-board-expanded > .task-board-header a.js-modal-large { order:2 !important; }
+#board .task-board .task-board-expanded > .task-board-header .task-board-avatars { margin-left:auto !important; }
