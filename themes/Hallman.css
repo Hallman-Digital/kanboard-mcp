@@ -118,7 +118,7 @@ html, body { background: var(--kb-canvas); }
   vertical-align: top;
 }
 
-/* Stable card layout: content first, then one compact footer row. */
+/* Card content and footer controls: keep content first, metadata last. */
 #board .task-board .task-board-expanded {
   display: flex !important;
   flex-flow: row wrap !important;
@@ -132,7 +132,7 @@ html, body { background: var(--kb-canvas); }
   display: contents !important;
 }
 
-/* Main task title and subtask checklist occupy full rows before footer metadata. */
+/* Title and nested checklist each take a full row before the footer. */
 #board .task-board .task-board-expanded .task-board-title {
   order: 1 !important;
   flex: 0 0 100% !important;
@@ -142,11 +142,21 @@ html, body { background: var(--kb-canvas); }
   order: 2 !important;
   flex: 0 0 100% !important;
   width: 100% !important;
-  border: 0 !important;
   margin-top: 5px !important;
+  border: 0 !important;
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+}
+#board .task-board .table-suboncard,
+#board .task-board .table-suboncard tbody,
+#board .task-board .table-suboncard tr,
+#board .task-board .table-suboncard td {
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
 }
 
-/* A single divider separates card content from the footer. */
+/* Divider between checklist and compact metadata footer. */
 #board .task-board .task-board-expanded::after {
   content: "";
   order: 3 !important;
@@ -157,7 +167,7 @@ html, body { background: var(--kb-canvas); }
   border-top: 1px solid rgba(50, 60, 70, .08);
 }
 
-/* Footer order: ID/dropdown, edit, progress, priority, assignee at far right. */
+/* Footer order: ID, edit, progress, priority, then avatar at far right. */
 #board .task-board .task-board-header a.dropdown-menu-link-icon {
   order: 4 !important;
   color: var(--kb-muted) !important;
@@ -168,15 +178,17 @@ html, body { background: var(--kb-canvas); }
   color: var(--kb-muted) !important;
   margin: 0 !important;
 }
-#board .task-board .task-board-icons a[href*="BoardTooltipController"][href*="subtasks"] {
+/* Move every footer icon out of the default leading position. */
+#board .task-board .task-board-icons a,
+#board .task-board .task-board-icons span {
   order: 6 !important;
   color: var(--kb-muted) !important;
-  margin: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
 }
 #board .task-board .task-board-icons .task-priority {
   order: 7 !important;
   color: var(--kb-muted) !important;
-  margin: 0 !important;
 }
 #board .task-board .task-board-header .task-board-assignee { display: none !important; }
 #board .task-board .task-board-header .task-board-avatars {
@@ -185,14 +197,14 @@ html, body { background: var(--kb-canvas); }
   margin-right: 0 !important;
 }
 
-/* Hide the description tooltip by its actual Kanboard action URL and icon. */
-#board .task-board a[href*="BoardTooltipController"][href*="description"],
+/* Hide the description tooltip link by its icon and action URL. */
+#board .task-board .task-board-icons a[href*="description"],
 #board .task-board .task-board-icons a:has(i.fa-file-text-o),
 #board .task-board .task-board-icons a:has(i[class~="fa-file-text-o"]) {
   display: none !important;
 }
 
-/* All non-avatar metadata controls use the same muted gray. */
+/* All non-avatar metadata controls use one muted gray. */
 #board .task-board .task-board-header a,
 #board .task-board .task-board-header a *,
 #board .task-board .task-board-icons,
