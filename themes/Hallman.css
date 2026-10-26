@@ -344,3 +344,24 @@ form:has(#form-title) #form-reference {
   margin-left: auto !important;
   margin-right: 0 !important;
 }
+
+
+/* Explicit final footer order: ID, edit, description, progress, priority, avatar. */
+#board .task-board .task-board-expanded > .task-board-header .dropdown { order: 1 !important; color: #8a929b !important; }
+#board .task-board .task-board-expanded > .task-board-header .dropdown a,
+#board .task-board .task-board-expanded > .task-board-header .dropdown strong,
+#board .task-board .task-board-expanded > .task-board-header .dropdown i { color: #8a929b !important; }
+#board .task-board .task-board-expanded > .task-board-header a.js-modal-large { order: 2 !important; color: #8a929b !important; }
+#board .task-board .task-board-expanded .task-board-icons-row a:has(i.fa-file-text-o) { order: 3 !important; color: #8a929b !important; }
+#board .task-board .task-board-expanded .task-board-icons-row a:has(i.fa-bars) { order: 4 !important; color: #8a929b !important; margin-left: 0 !important; }
+#board .task-board .task-board-expanded .task-board-icons-row .task-priority { order: 5 !important; color: #8a929b !important; }
+#board .task-board .task-board-expanded > .task-board-header .task-board-avatars { order: 6 !important; margin-left: auto !important; margin-right: 0 !important; }
+#board .task-board .task-board-expanded > .task-board-header a,
+#board .task-board .task-board-expanded > .task-board-header a i,
+#board .task-board .task-board-expanded .task-board-icons-row,
+#board .task-board .task-board-expanded .task-board-icons-row a,
+#board .task-board .task-board-expanded .task-board-icons-row a i,
+#board .task-board .task-board-expanded .task-board-icons-row span,
+#board .task-board .task-board-expanded .task-board-icons-row .task-priority {
+  color: #8a929b !important;
+}
