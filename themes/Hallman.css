@@ -546,3 +546,36 @@ html, body, button, input, select, textarea, label,
 code, pre, kbd, samp {
   font-family: ui-monospace, 'SFMono-Regular', Consolas, monospace !important;
 }
+
+
+/* SubtasksOnBoard: remove its thick top spacer, which appears as a stray gray bar. */
+#board .task-board .table-suboncard {
+  border-top: 0 !important;
+  border-top-width: 0 !important;
+  border-top-style: none !important;
+  border-top-color: transparent !important;
+  margin-top: 4px !important;
+  padding-top: 0 !important;
+  background: transparent !important;
+}
+#board .task-board .table-suboncard td,
+#board .task-board .table-suboncard td:nth-child(1),
+#board .task-board .table-suboncard td:nth-child(2) {
+  background: transparent !important;
+}
+/* Remove the earlier mistaken TaskProgressBar styling; this setup does not use it. */
+#board .container-task-progress-bar,
+#board .container-task-progress-bar .task-progress-bar {
+  display: none !important;
+}
+/* Use Manrope for the UI, with system fallbacks. Monospace is code-only. */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
+html, body, button, input, select, textarea, label,
+#board, #board .task-board, #board .task-board-title,
+#board .table-suboncard, #board .table-suboncard td,
+#board .table-suboncard a {
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+}
+code, pre, kbd, samp {
+  font-family: ui-monospace, 'SFMono-Regular', Consolas, monospace !important;
+}
