@@ -365,3 +365,24 @@ form:has(#form-title) #form-reference {
 #board .task-board .task-board-expanded .task-board-icons-row .task-priority {
   color: #8a929b !important;
 }
+
+
+/* Final footer color consistency: all non-user controls match task ID/edit. */
+#board .task-board .task-board-expanded .task-board-icons-row,
+#board .task-board .task-board-expanded .task-board-icons-row a,
+#board .task-board .task-board-expanded .task-board-icons-row a i,
+#board .task-board .task-board-expanded .task-board-icons-row span,
+#board .task-board .task-board-expanded .task-board-icons-row .task-priority,
+#board .task-board .task-board-expanded .task-board-icons-row .task-score,
+#board .task-board .task-board-expanded .task-board-header .dropdown,
+#board .task-board .task-board-expanded .task-board-header .dropdown a,
+#board .task-board .task-board-expanded .task-board-header .dropdown strong,
+#board .task-board .task-board-expanded .task-board-header .dropdown i,
+#board .task-board .task-board-expanded .task-board-header a.js-modal-large,
+#board .task-board .task-board-expanded .task-board-header a.js-modal-large i {
+  color: #8a929b !important;
+}
+/* Description icon is intentionally omitted from the card footer. */
+#board .task-board .task-board-expanded .task-board-icons-row a:has(i.fa-file-text-o) {
+  display: none !important;
+}
