@@ -260,3 +260,19 @@ form:has(#form-title) .form-color_id {
   opacity: 1 !important;
   filter: none !important;
 }
+
+
+/* Subtasks are already visible on cards, so keep the percentage as a static indicator. */
+#board .task-board .task-board-icons .tooltip[data-href*="subtasks"] {
+  pointer-events: none !important;
+  cursor: default !important;
+}
+
+
+/* The subtask checklist is already visible on cards, so suppress its hover popup. */
+#board .task-board .task-board-icons-row span.tooltip:has(i.fa-bars) {
+  pointer-events: none !important;
+}
+#board .task-board .task-board-icons-row span.tooltip:has(i.fa-bars) > * {
+  pointer-events: none !important;
+}
