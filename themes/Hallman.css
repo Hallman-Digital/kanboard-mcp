@@ -243,3 +243,20 @@ form:has(#form-title) .form-color_id {
 #board .task-board .task-board-icons a[href*="description"],
 #board .task-board .task-board-icons a:has(i.fa-file-text-o),
 #board .task-board .task-board-icons i.fa-file-text-o { display: none !important; }
+
+
+/* Unify footer metadata contrast with the task ID and edit control. */
+#board .task-board .task-board-header a.dropdown-menu-link-icon,
+#board .task-board .task-board-header a.js-modal-large,
+#board .task-board .task-board-icons,
+#board .task-board .task-board-icons-row,
+#board .task-board .task-board-icons-row a,
+#board .task-board .task-board-icons-row span,
+#board .task-board .task-board-icons-row i,
+#board .task-board .task-board-icons a *,
+#board .task-board .task-priority,
+#board .task-board .task-priority * {
+  color: #8a929b !important;
+  opacity: 1 !important;
+  filter: none !important;
+}
