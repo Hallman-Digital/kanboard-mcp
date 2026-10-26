@@ -386,3 +386,95 @@ form:has(#form-title) #form-reference {
 #board .task-board .task-board-expanded .task-board-icons-row a:has(i.fa-file-text-o) {
   display: none !important;
 }
+
+
+/* Modern Kanboard pass: neutral surfaces, softer status tints, clearer hierarchy. */
+:root {
+  --kb-canvas: #f6f7f9;
+  --kb-surface: #ffffff;
+  --kb-border: #dfe3e8;
+  --kb-text: #202833;
+  --kb-muted: #8a929b;
+  --kb-radius: 8px;
+}
+html, body {
+  background: var(--kb-canvas) !important;
+  color: var(--kb-text);
+}
+#board {
+  background: transparent !important;
+}
+#board table,
+#board tbody,
+#board tr {
+  background: transparent;
+}
+#board th.board-column-header {
+  background: #f8f9fb !important;
+  border-top: 1px solid #e6e9ee !important;
+  border-left: 1px solid #e6e9ee !important;
+  border-right: 1px solid #e6e9ee !important;
+  border-radius: 8px 8px 0 0;
+  padding: 10px 12px !important;
+}
+#board td.board-column {
+  background: transparent !important;
+  border-left: 1px solid #e7eaee !important;
+  border-right: 1px solid #e7eaee !important;
+}
+#board .task-board {
+  border-radius: var(--kb-radius) !important;
+  box-shadow: 0 1px 2px rgba(20, 30, 45, .04);
+  color: var(--kb-text);
+  padding: 8px !important;
+  margin: 6px 4px !important;
+}
+#board .task-board:hover {
+  filter: none !important;
+  box-shadow: 0 3px 10px rgba(20, 30, 45, .09) !important;
+  transform: translateY(-1px);
+}
+#board .task-board .task-board-title {
+  color: var(--kb-text);
+  font-weight: 500;
+  line-height: 1.4;
+}
+#board .task-board .table-suboncard {
+  border-top-color: rgba(40, 52, 68, .10) !important;
+}
+#board .task-board .table-suboncard td {
+  border-color: rgba(40, 52, 68, .07) !important;
+}
+#board th.board-column-header-26,
+#board th.board-column-header-11,
+#board th.board-column-header-21,
+#board th.board-column-header-6,
+#board th.board-column-header-16,
+#board th.board-column-header-1 { border-bottom-width: 2px !important; }
+#board th.board-column-header-27,
+#board th.board-column-header-12,
+#board th.board-column-header-22,
+#board th.board-column-header-7,
+#board th.board-column-header-17,
+#board th.board-column-header-2 { border-bottom-width: 2px !important; }
+#board th.board-column-header-28,
+#board th.board-column-header-13,
+#board th.board-column-header-23,
+#board th.board-column-header-8,
+#board th.board-column-header-18,
+#board th.board-column-header-3 { border-bottom-width: 2px !important; }
+#board th.board-column-header-29,
+#board th.board-column-header-14,
+#board th.board-column-header-24,
+#board th.board-column-header-9,
+#board th.board-column-header-19,
+#board th.board-column-header-4 { border-bottom-width: 2px !important; }
+#board th.board-column-header-30,
+#board th.board-column-header-15,
+#board th.board-column-header-25,
+#board th.board-column-header-10,
+#board th.board-column-header-20,
+#board th.board-column-header-5 { border-bottom-width: 2px !important; }
+.btn, button, input, select, textarea, .form-control {
+  border-radius: 6px;
+}
