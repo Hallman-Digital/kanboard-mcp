@@ -97,7 +97,10 @@ html, body { background: var(--kb-canvas); }
 /* SubtasksOnBoard: keep checklist rows clean, with no stray rule above the first item. */
 #board .task-board .table-suboncard {
   margin-top: 5px !important;
-  border: 0 !important;
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
   background: transparent !important;
 }
 #board .task-board .table-suboncard td {
@@ -115,12 +118,13 @@ html, body { background: var(--kb-canvas); }
   vertical-align: top;
 }
 
-/* Card content stays in natural order. Only flatten the metadata wrappers. */
+/* Card content remains full-width; only metadata controls share a footer row. */
 #board .task-board .task-board-expanded {
-  display: flex !important;
-  flex-direction: row !important;
-  flex-wrap: wrap !important;
+  display: grid !important;
+  grid-template-columns: repeat(5, max-content) minmax(0, 1fr) max-content;
   align-items: center !important;
+  column-gap: 5px;
+  row-gap: 0;
 }
 #board .task-board .task-board-expanded > .task-board-header,
 #board .task-board .task-board-expanded > .task-board-icons,
@@ -129,57 +133,64 @@ html, body { background: var(--kb-canvas); }
   display: contents !important;
 }
 
-/* One divider after the title and subtasks, before all footer controls. */
+/* Keep title and subtask checklist on their own full-width rows. */
+#board .task-board .task-board-expanded > .task-board-title,
+#board .task-board .task-board-expanded > .table-suboncard,
+#board .task-board .task-board-expanded > table,
+#board .task-board .task-board-expanded > .task-board-icons {
+  grid-column: 1 / -1 !important;
+}
+#board .task-board .task-board-expanded > .task-board-title { order: 1; }
+#board .task-board .task-board-expanded > .table-suboncard { order: 2; }
+
+/* Divider follows the subtask list and precedes the one-line footer. */
 #board .task-board .task-board-expanded::after {
   content: "";
   display: block;
-  flex: 0 0 100%;
+  grid-column: 1 / -1;
   width: 100%;
-  order: 10;
   margin: 5px 0 4px;
   border-top: 1px solid rgba(50, 60, 70, .08);
+  order: 3;
 }
 
-/* Footer order: task ID/dropdown, edit, subtask percentage, priority, avatar. */
+/* Footer controls: ID/dropdown, edit, percentage, priority, avatar at far right. */
 #board .task-board .task-board-header a.dropdown-menu-link-icon {
-  order: 11 !important;
+  order: 4 !important;
   color: var(--kb-muted) !important;
-  margin-right: 5px !important;
+  margin: 0 !important;
 }
 #board .task-board .task-board-header a.js-modal-large {
-  order: 12 !important;
+  order: 5 !important;
   color: var(--kb-muted) !important;
-  margin: 0 5px 0 0 !important;
-}
-#board .task-board .task-board-icons .task-board-icons-row > * {
-  order: 13 !important;
-  color: var(--kb-muted) !important;
-}
-#board .task-board .task-board-icons a:has(i.fa-file-text-o),
-#board .task-board .task-board-icons a[href*="action=description"],
-#board .task-board .task-board-icons a[href*="description"] {
-  display: none !important;
+  margin: 0 !important;
 }
 #board .task-board .task-board-icons a[href*="action=subtasks"] {
-  order: 13 !important;
+  order: 6 !important;
   color: var(--kb-muted) !important;
-  margin-right: 5px !important;
+  margin: 0 !important;
 }
 #board .task-board .task-board-icons .task-priority {
-  order: 14 !important;
+  order: 7 !important;
   color: var(--kb-muted) !important;
-  margin-right: 5px !important;
+  margin: 0 !important;
 }
-#board .task-board .task-board-header .task-board-assignee {
-  display: none !important;
-}
+#board .task-board .task-board-header .task-board-assignee { display: none !important; }
 #board .task-board .task-board-header .task-board-avatars {
-  order: 15 !important;
-  margin-left: auto !important;
-  margin-right: 0 !important;
+  order: 8 !important;
+  grid-column: 7;
+  justify-self: end;
+  margin: 0 !important;
 }
 
-/* Match all non-avatar metadata to one consistent muted gray. */
+/* Remove only the description tooltip control, regardless of query-string order. */
+#board .task-board .task-board-icons a[href*="description"],
+#board .task-board .task-board-icons a:has(i.fa-file-text-o),
+#board .task-board .task-board-icons a:has(i[class~="fa-file-text-o"]) {
+  display: none !important;
+}
+
+/* All non-avatar footer indicators use the same muted gray. */
 #board .task-board .task-board-header a,
 #board .task-board .task-board-header a *,
 #board .task-board .task-board-icons,
