@@ -516,3 +516,33 @@ code, pre, kbd, samp {
 @media (prefers-reduced-motion: reduce) {
   #board .container-task-progress-bar .task-progress-bar { transition: none; }
 }
+
+
+/* Correction: SubtasksOnBoard's spacer is a 12px transparent table border.
+   Keep the spacing, but never tint it into a fake progress bar. */
+#board .task-board .table-suboncard {
+  border-top-color: transparent !important;
+  border-bottom-color: transparent !important;
+  background: transparent !important;
+}
+#board .task-board .table-suboncard td,
+#board .task-board .table-suboncard td:nth-child(1),
+#board .task-board .table-suboncard td:nth-child(2) {
+  background-color: transparent !important;
+}
+/* This setup does not use TaskProgressBar: do not style or display its markup. */
+#board .container-task-progress-bar {
+  display: none !important;
+}
+/* Typography direction: Manrope for a more contemporary, humanist SaaS UI.
+   Keep monospace restricted to code and preformatted technical content. */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
+html, body, button, input, select, textarea, label,
+#board, #board .task-board, #board .task-board-title,
+#board .table-suboncard, #board .table-suboncard td,
+#board .table-suboncard a {
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+}
+code, pre, kbd, samp {
+  font-family: ui-monospace, 'SFMono-Regular', Consolas, monospace !important;
+}
