@@ -118,13 +118,12 @@ html, body { background: var(--kb-canvas); }
   vertical-align: top;
 }
 
-/* Card content remains full-width; only metadata controls share a footer row. */
+/* Stable card layout: content first, then one compact footer row. */
 #board .task-board .task-board-expanded {
-  display: grid !important;
-  grid-template-columns: repeat(5, max-content) minmax(0, 1fr) max-content;
+  display: flex !important;
+  flex-flow: row wrap !important;
   align-items: center !important;
-  column-gap: 5px;
-  row-gap: 0;
+  gap: 0 6px;
 }
 #board .task-board .task-board-expanded > .task-board-header,
 #board .task-board .task-board-expanded > .task-board-icons,
@@ -133,28 +132,32 @@ html, body { background: var(--kb-canvas); }
   display: contents !important;
 }
 
-/* Keep title and subtask checklist on their own full-width rows. */
-#board .task-board .task-board-expanded > .task-board-title,
-#board .task-board .task-board-expanded > .table-suboncard,
-#board .task-board .task-board-expanded > table,
-#board .task-board .task-board-expanded > .task-board-icons {
-  grid-column: 1 / -1 !important;
+/* Main task title and subtask checklist occupy full rows before footer metadata. */
+#board .task-board .task-board-expanded .task-board-title {
+  order: 1 !important;
+  flex: 0 0 100% !important;
+  width: 100% !important;
 }
-#board .task-board .task-board-expanded > .task-board-title { order: 1; }
-#board .task-board .task-board-expanded > .table-suboncard { order: 2; }
+#board .task-board .task-board-expanded .table-suboncard {
+  order: 2 !important;
+  flex: 0 0 100% !important;
+  width: 100% !important;
+  border: 0 !important;
+  margin-top: 5px !important;
+}
 
-/* Divider follows the subtask list and precedes the one-line footer. */
+/* A single divider separates card content from the footer. */
 #board .task-board .task-board-expanded::after {
   content: "";
+  order: 3 !important;
   display: block;
-  grid-column: 1 / -1;
+  flex: 0 0 100% !important;
   width: 100%;
   margin: 5px 0 4px;
   border-top: 1px solid rgba(50, 60, 70, .08);
-  order: 3;
 }
 
-/* Footer controls: ID/dropdown, edit, percentage, priority, avatar at far right. */
+/* Footer order: ID/dropdown, edit, progress, priority, assignee at far right. */
 #board .task-board .task-board-header a.dropdown-menu-link-icon {
   order: 4 !important;
   color: var(--kb-muted) !important;
@@ -165,7 +168,7 @@ html, body { background: var(--kb-canvas); }
   color: var(--kb-muted) !important;
   margin: 0 !important;
 }
-#board .task-board .task-board-icons a[href*="action=subtasks"] {
+#board .task-board .task-board-icons a[href*="BoardTooltipController"][href*="subtasks"] {
   order: 6 !important;
   color: var(--kb-muted) !important;
   margin: 0 !important;
@@ -178,19 +181,18 @@ html, body { background: var(--kb-canvas); }
 #board .task-board .task-board-header .task-board-assignee { display: none !important; }
 #board .task-board .task-board-header .task-board-avatars {
   order: 8 !important;
-  grid-column: 7;
-  justify-self: end;
-  margin: 0 !important;
+  margin-left: auto !important;
+  margin-right: 0 !important;
 }
 
-/* Remove only the description tooltip control, regardless of query-string order. */
-#board .task-board .task-board-icons a[href*="description"],
+/* Hide the description tooltip by its actual Kanboard action URL and icon. */
+#board .task-board a[href*="BoardTooltipController"][href*="description"],
 #board .task-board .task-board-icons a:has(i.fa-file-text-o),
 #board .task-board .task-board-icons a:has(i[class~="fa-file-text-o"]) {
   display: none !important;
 }
 
-/* All non-avatar footer indicators use the same muted gray. */
+/* All non-avatar metadata controls use the same muted gray. */
 #board .task-board .task-board-header a,
 #board .task-board .task-board-header a *,
 #board .task-board .task-board-icons,
