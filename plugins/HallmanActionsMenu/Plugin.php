@@ -9,6 +9,6 @@ class Plugin extends Base {
     public function getPluginName() { return 'HallmanActionsMenu'; }
     public function getPluginDescription() { return 'Collapses task-detail Actions into a native disclosure menu, preserving existing Kanboard links.'; }
     public function getPluginAuthor() { return 'Hallman.Digital'; }
-    public function getPluginVersion() { return '0.1.0'; }
+    public function getPluginVersion() { return '0.2.0'; }
     public function getCompatibleVersion() { return '>=1.2.20'; }
 }
