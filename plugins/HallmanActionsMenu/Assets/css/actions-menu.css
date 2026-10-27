@@ -79,3 +79,19 @@
 @media (prefers-reduced-motion: reduce) {
   .sidebar.sidebar-icons .hallman-actions-trigger::after { transition: none; }
 }
+
+/* Suppress inherited Kanboard list markers for Actions links. */
+.sidebar.sidebar-icons .hallman-actions-disclosure > ul {
+  list-style: none !important;
+  list-style-type: none !important;
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+}
+.sidebar.sidebar-icons .hallman-actions-disclosure > ul > li {
+  list-style: none !important;
+  list-style-type: none !important;
+  margin-left: 0 !important;
+}
+.sidebar.sidebar-icons .hallman-actions-disclosure > ul > li::marker {
+  content: "" !important;
+}
