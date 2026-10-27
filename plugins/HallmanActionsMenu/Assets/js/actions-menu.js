@@ -55,16 +55,16 @@
       });
       if (!link) return; // Respect permissions: don't create a link if Kanboard omitted it.
       const origin = link.closest('li');
-      const label = document.createElement('span');
-      label.className = 'hallman-section-action-label';
-      label.textContent = route.label;
       link.classList.add('hallman-section-action');
       link.setAttribute('aria-label', route.label);
       // Existing icon is reused. Replace only its text nodes.
       Array.from(link.childNodes).forEach(function (node) {
         if (node.nodeType === Node.TEXT_NODE) node.remove();
       });
-      link.appendChild(label);
+      link.appendChild(document.createTextNode(' ' + route.label));
+      if (route.controller === 'TaskExternalLinkController') {
+        link.classList.add('js-modal-medium');
+      }
       section.appendChild(link);
       // Empty source row is removed only after the action is moved successfully.
       if (origin && !origin.querySelector('a, button, input')) origin.remove();
@@ -95,10 +95,7 @@
         Array.from(screenshot.childNodes).forEach(function (node) {
           if (node.nodeType === Node.TEXT_NODE) node.remove();
         });
-        const label = document.createElement('span');
-        label.className = 'hallman-section-action-label';
-        label.textContent = 'Screenshot';
-        screenshot.appendChild(label);
+        screenshot.appendChild(document.createTextNode(' Screenshot'));
         group.appendChild(screenshot);
         if (origin && !origin.querySelector('a, button, input')) origin.remove();
       }
