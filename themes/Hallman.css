@@ -468,3 +468,53 @@ body:has(a[href*="TaskViewController"][href*="task_id=102"]) #task-summary .task
   background: var(--kb-progress-bg) !important;
   border-color: var(--kb-progress) !important;
 }
+
+
+/* Accordion polish: remove the inset white strip and make disclosure state obvious. */
+details.accordion-section {
+  padding: 0 !important;
+  background: var(--kb-surface) !important;
+}
+details.accordion-section > summary.accordion-title {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  min-height: 50px;
+  margin: 0 !important;
+  padding: 14px 16px !important;
+  background: #f1f3f6 !important;
+  border: 0 !important;
+  border-radius: 9px 9px 0 0 !important;
+  list-style: none !important;
+}
+details.accordion-section:not([open]) > summary.accordion-title {
+  border-radius: 9px !important;
+}
+details.accordion-section > summary.accordion-title::before {
+  content: "";
+  display: inline-block;
+  flex: 0 0 8px;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid #7b8490;
+  border-bottom: 2px solid #7b8490;
+  transform: rotate(-45deg);
+  transform-origin: center;
+  transition: transform 140ms ease;
+  margin: 0 2px 0 1px;
+}
+details.accordion-section[open] > summary.accordion-title::before {
+  transform: rotate(45deg);
+  margin-top: -4px;
+}
+details.accordion-section > summary.accordion-title::-webkit-details-marker {
+  display: none !important;
+}
+details.accordion-section[open] > summary.accordion-title {
+  border-bottom: 1px solid var(--kb-border) !important;
+}
+details.accordion-section > .accordion-content {
+  margin: 0 !important;
+  border-radius: 0 0 9px 9px;
+}
