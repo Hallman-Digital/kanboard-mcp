@@ -137,13 +137,67 @@
     panel.style.setProperty('background-color', workflow.bg, 'important');
     panel.style.setProperty('border-color', workflow.border, 'important');
   }
+  function enhanceTaskEditModal() {
+    const form = document.querySelector('#modal-overlay .task-form-container');
+    if (!form || form.dataset.hallmanTaskLayout === 'v2') return;
+    const columns = Array.from(form.querySelectorAll(':scope > .task-form-secondary-column'));
+    const main = form.querySelector(':scope > .task-form-main-column');
+    if (!main || !columns.length) return;
+    const tags = main.querySelector('#form-tags');
+    if (!tags) return;
+
+    // Relocate assignee, category, and priority into a compact block below Tags.
+    const fields = [
+      { id: 'owner_id', key: 'assignee' },
+      { id: 'category_id', key: 'category' },
+      { id: 'priority', key: 'priority' }
+    ];
+    const relocated = document.createElement('div');
+    relocated.className = 'hallman-task-relocated-fields';
+    fields.forEach(function (field) {
+      const label = form.querySelector('label[for="form-' + field.id + '"]');
+      const control = form.querySelector('#form-' + field.id);
+      if (!label || !control) return;
+      const wrapper = document.createElement('div');
+      wrapper.className = 'hallman-task-field hallman-task-field-' + field.key;
+      label.parentNode && wrapper.appendChild(label);
+      wrapper.appendChild(control);
+      if (field.id === 'owner_id') {
+        const assignMe = form.querySelector('a.assign-me[data-target-id="form-owner_id"]');
+        if (assignMe) wrapper.appendChild(assignMe.closest('small') || assignMe);
+      }
+      relocated.appendChild(wrapper);
+    });
+    if (relocated.children.length) {
+      tags.insertAdjacentElement('afterend', relocated);
+    }
+
+    // Merge the date/time fields into the color column so Due Date follows Color,
+    // rather than appearing in a third grid column or far below it.
+    if (columns.length > 1) {
+      const first = columns[0];
+      const second = columns[1];
+      Array.from(second.childNodes).forEach(function (node) { first.appendChild(node); });
+      second.remove();
+    }
+    form.dataset.hallmanTaskLayout = 'v2';
+  }
+
+  function watchTaskEditModal() {
+    enhanceTaskEditModal();
+    const observer = new MutationObserver(function () { enhanceTaskEditModal(); });
+    observer.observe(document.body, { childList: true, subtree: true });
+  }
+
   function enhance() {
     colorTaskSummary();
     enhanceTaskSidebar();
+    enhanceTaskEditModal();
     addSectionActions();
   }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', enhance, {once: true});
   } else enhance();
   document.addEventListener('kanboard:page:loaded', enhance);
+  if (document.body) watchTaskEditModal();
 })();
