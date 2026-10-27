@@ -540,3 +540,167 @@ details.accordion-section > .hallman-section-actions {
   top:50% !important;
   transform:translateY(-50%) !important;
 }
+
+
+/* Correct task cards: Kanboard stores column identity on the containing TD, not the card. */
+#board td.board-column-26 .task-board, #board td.board-column-11 .task-board, #board td.board-column-21 .task-board, #board td.board-column-6 .task-board, #board td.board-column-16 .task-board, #board td.board-column-1 .task-board {
+  background:var(--kb-backlog-bg,#EEF0F3) !important; border:1px solid var(--kb-backlog,#6B7280) !important;
+}
+#board td.board-column-27 .task-board, #board td.board-column-12 .task-board, #board td.board-column-22 .task-board, #board td.board-column-7 .task-board, #board td.board-column-17 .task-board, #board td.board-column-2 .task-board {
+  background:var(--kb-ready-bg,#E8F1FF) !important; border:1px solid var(--kb-ready,#3B82F6) !important;
+}
+#board td.board-column-28 .task-board, #board td.board-column-13 .task-board, #board td.board-column-23 .task-board, #board td.board-column-8 .task-board, #board td.board-column-18 .task-board, #board td.board-column-3 .task-board {
+  background:var(--kb-progress-bg,#FFF3D9) !important; border:1px solid var(--kb-progress,#F59E0B) !important;
+}
+#board td.board-column-29 .task-board, #board td.board-column-14 .task-board, #board td.board-column-24 .task-board, #board td.board-column-9 .task-board, #board td.board-column-19 .task-board, #board td.board-column-4 .task-board {
+  background:var(--kb-blocked-bg,#FDE8E8) !important; border:1px solid var(--kb-blocked,#EF4444) !important;
+}
+#board td.board-column-30 .task-board, #board td.board-column-15 .task-board, #board td.board-column-25 .task-board, #board td.board-column-10 .task-board, #board td.board-column-20 .task-board, #board td.board-column-5 .task-board {
+  background:var(--kb-done-bg,#E2F7EF) !important; border:1px solid var(--kb-done,#10B981) !important;
+}
+#board .task-board .task-board-expanded,
+#board .task-board .task-board-header,
+#board .task-board .task-board-icons,
+#board .task-board .task-board-icons-row { background:transparent !important; }
+
+/* Two-pane task editor: content and tags left, all metadata right. */
+#modal-overlay #modal-box:has(.task-form-container) {
+  width:min(1000px,calc(100vw - 36px)) !important;
+  max-width:calc(100vw - 36px) !important;
+}
+#modal-overlay #modal-content .task-form-container {
+  display:grid !important;
+  grid-template-columns:minmax(0,1.5fr) minmax(240px,.85fr) !important;
+  gap:16px 22px !important;
+  align-items:start !important;
+  width:100% !important;
+}
+#modal-overlay #modal-content .task-form-main-column {
+  grid-column:1 !important;
+  width:auto !important;
+  min-width:0 !important;
+  max-width:none !important;
+  padding:0 !important;
+  margin:0 !important;
+}
+#modal-overlay #modal-content .task-form-secondary-column {
+  grid-column:2 !important;
+  width:auto !important;
+  min-width:0 !important;
+  max-width:none !important;
+  max-height:none !important;
+  padding:0 !important;
+  margin:0 !important;
+  overflow:visible !important;
+}
+#modal-overlay #modal-content .task-form-main-column input[type="text"],
+#modal-overlay #modal-content .task-form-main-column textarea,
+#modal-overlay #modal-content .task-form-main-column select,
+#modal-overlay #modal-content .task-form-main-column .form-control,
+#modal-overlay #modal-content .task-form-secondary-column input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]),
+#modal-overlay #modal-content .task-form-secondary-column select,
+#modal-overlay #modal-content .task-form-secondary-column .form-control {
+  width:100% !important;
+  max-width:100% !important;
+  box-sizing:border-box !important;
+}
+#modal-overlay #modal-content .task-form-main-column label,
+#modal-overlay #modal-content .task-form-secondary-column label {
+  display:block !important;
+  max-width:100% !important;
+  box-sizing:border-box !important;
+}
+#modal-overlay #modal-content .task-form-main-column .form-required,
+#modal-overlay #modal-content .task-form-secondary-column .form-required {
+  color:#b42318 !important;
+}
+#modal-overlay #modal-content .task-form-bottom { grid-column:1 / -1 !important; width:100% !important; }
+@media(max-width:700px) {
+  #modal-overlay #modal-content .task-form-container { grid-template-columns:minmax(0,1fr) !important; }
+  #modal-overlay #modal-content .task-form-main-column,
+  #modal-overlay #modal-content .task-form-secondary-column,
+  #modal-overlay #modal-content .task-form-bottom { grid-column:1 !important; }
+}
+
+/* Native modal header: keep close control on the same row as the actual title. */
+#modal-overlay #modal-header {
+  position:absolute !important;
+  top:0 !important; left:0 !important; right:0 !important;
+  height:0 !important; min-height:0 !important;
+  padding:0 !important; margin:0 !important; border:0 !important;
+  overflow:visible !important; background:transparent !important; z-index:20 !important;
+}
+#modal-overlay #modal-content { padding-top:14px !important; }
+#modal-overlay #modal-content .page-header {
+  position:relative !important;
+  margin:0 0 16px !important;
+  padding:0 42px 12px 0 !important;
+  border:0 !important;
+}
+#modal-overlay #modal-content .page-header h2 {
+  margin:0 !important;
+  padding:0 0 12px !important;
+  border-bottom:1px solid #e7ebf0 !important;
+  line-height:1.35 !important;
+}
+#modal-overlay #modal-close-button {
+  position:absolute !important;
+  top:12px !important; right:18px !important;
+  width:30px !important; height:30px !important;
+  padding:0 !important; margin:0 !important;
+  display:flex !important; align-items:center !important; justify-content:center !important;
+  line-height:1 !important; box-sizing:border-box !important;
+}
+#modal-overlay #modal-close-button .fa { line-height:1 !important; margin:0 !important; padding:0 !important; }
+
+/* Attachment actions live inside the Attachments summary, not the panel body. */
+details.accordion-section > summary.accordion-title > .hallman-section-actions {
+  position:absolute !important;
+  top:50% !important; right:10px !important;
+  transform:translateY(-50%) !important;
+  display:flex !important; align-items:center !important; justify-content:flex-end !important;
+  gap:6px !important; z-index:4 !important;
+}
+details.accordion-section > summary.accordion-title > .hallman-section-actions > .hallman-section-action,
+details.accordion-section > summary.accordion-title > .hallman-section-action {
+  position:static !important; transform:none !important;
+  display:inline-flex !important; align-items:center !important; justify-content:center !important;
+  gap:6px !important; height:30px !important; min-height:30px !important;
+  padding:0 10px !important; margin:0 !important;
+  border:1px solid #d8dfe7 !important; border-radius:6px !important;
+  background:#fff !important; color:#526170 !important;
+  font-size:12px !important; font-weight:600 !important; line-height:1 !important;
+  text-decoration:none !important; white-space:nowrap !important;
+}
+details.accordion-section > summary.accordion-title > .hallman-section-actions > .hallman-section-action .fa {
+  font-size:12px !important; line-height:1 !important; color:#687786 !important;
+}
+details.accordion-section:has(> summary > .hallman-section-actions) > summary.accordion-title {
+  padding-right:230px !important;
+}
+@media(max-width:640px) {
+  details.accordion-section:has(> summary > .hallman-section-actions) > summary.accordion-title { padding-right:190px !important; }
+  details.accordion-section > summary.accordion-title > .hallman-section-actions { right:6px !important; gap:4px !important; }
+  details.accordion-section > summary.accordion-title > .hallman-section-actions > .hallman-section-action { padding:0 6px !important; font-size:11px !important; }
+}
+
+/* Keep upload, cancel, and save actions on one consistent control system. */
+#modal-overlay #modal-content .form-actions { display:flex !important; align-items:center !important; gap:8px !important; }
+#modal-overlay #modal-content .form-actions button,
+#modal-overlay #modal-content .form-actions input[type="button"],
+#modal-overlay #modal-content .form-actions input[type="submit"],
+#modal-overlay #modal-content .form-actions button[type="submit"] {
+  min-height:34px !important; box-sizing:border-box !important;
+  padding:7px 13px !important; border-radius:6px !important;
+  font-size:13px !important; font-weight:600 !important; line-height:1.2 !important;
+}
+#modal-overlay #modal-content .form-actions button[type="submit"],
+#modal-overlay #modal-content .form-actions input[type="submit"] {
+  background:#3b82f6 !important; border:1px solid #3b82f6 !important; color:#fff !important;
+}
+#modal-overlay #modal-content .form-actions button:not([type="submit"]),
+#modal-overlay #modal-content .form-actions input[type="button"],
+#modal-overlay #modal-content .form-actions a {
+  background:#f1f4f8 !important; border:1px solid #d8dfe7 !important; color:#475569 !important;
+  text-decoration:none !important;
+}
