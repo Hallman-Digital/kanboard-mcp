@@ -276,3 +276,17 @@ form:has(#form-title) .form-color_id {
 #board .task-board .task-board-icons-row span.tooltip:has(i.fa-bars) > * {
   pointer-events: none !important;
 }
+
+
+/* Task #102 detail summary matches its In-Progress board card color. */
+body:has(#task-summary a[href*="task_id=102"]) #task-summary .task-summary-container {
+  background: #FFF3D9 !important;
+  border: 1px solid #F59E0B !important;
+  border-radius: 8px !important;
+  color: #202833 !important;
+  padding: 12px !important;
+}
+body:has(#task-summary a[href*="task_id=102"]) #task-summary .task-summary-container strong,
+body:has(#task-summary a[href*="task_id=102"]) #task-summary .task-summary-container span {
+  color: inherit;
+}
