@@ -69,6 +69,40 @@
       // Empty source row is removed only after the action is moved successfully.
       if (origin && !origin.querySelector('a, button, input')) origin.remove();
     });
+
+    // Keep clipboard screenshot capture next to the normal attachment action.
+    const attachmentSection = sections.find(function (node) {
+      return node.querySelector(':scope > summary').textContent.trim().toLowerCase() === 'attachments';
+    });
+    if (attachmentSection && !attachmentSection.querySelector('.hallman-screenshot-action')) {
+      const screenshot = Array.from(menu.querySelectorAll('li > a')).find(function (candidate) {
+        const url = new URL(candidate.href, window.location.href);
+        return url.searchParams.get('controller') === 'TaskFileController'
+          && url.searchParams.get('action') === 'screenshot';
+      });
+      if (screenshot) {
+        const origin = screenshot.closest('li');
+        const actions = attachmentSection.querySelector(':scope > .hallman-section-action');
+        let group = attachmentSection.querySelector(':scope > .hallman-section-actions');
+        if (!group) {
+          group = document.createElement('div');
+          group.className = 'hallman-section-actions';
+          if (actions) group.appendChild(actions);
+          attachmentSection.appendChild(group);
+        }
+        screenshot.classList.add('hallman-section-action', 'hallman-screenshot-action');
+        screenshot.setAttribute('aria-label', 'Paste screenshot');
+        Array.from(screenshot.childNodes).forEach(function (node) {
+          if (node.nodeType === Node.TEXT_NODE) node.remove();
+        });
+        const label = document.createElement('span');
+        label.className = 'hallman-section-action-label';
+        label.textContent = 'Screenshot';
+        screenshot.appendChild(label);
+        group.appendChild(screenshot);
+        if (origin && !origin.querySelector('a, button, input')) origin.remove();
+      }
+    }
   }
 
   function enhance() {
