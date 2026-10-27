@@ -907,3 +907,15 @@ details.accordion-section .comments form input[type=submit] {
   font-size: 13px !important;
   font-weight: 600 !important;
 }
+
+/* Comments are composed through the header's Add comment modal, not twice. */
+details.accordion-section:has(> a.hallman-section-action[href*="CommentController"]) > .accordion-content.comments > form {
+  display: none !important;
+}
+details.accordion-section:has(> a.hallman-section-action[href*="CommentController"]) > .accordion-content.comments > .comment-sorting > small a[href*="CommentController"][href*="action=create"] {
+  display: none !important;
+}
+/* Empty comment sections need no oversized blank editor area. */
+details.accordion-section:has(> a.hallman-section-action[href*="CommentController"]) > .accordion-content.comments {
+  min-height: 0 !important;
+}
