@@ -1092,3 +1092,11 @@ details.accordion-section > .hallman-section-actions > .hallman-section-action {
   font-size: 14px !important;
   line-height: 30px !important;
 }
+
+
+/* Override legacy task-102-only styling with the column-driven palette on every task. */
+body:has(#task-summary) #task-summary .task-summary-container[data-hallman-workflow="backlog"] { background:var(--kb-backlog-bg) !important; border-color:var(--kb-backlog) !important; }
+body:has(#task-summary) #task-summary .task-summary-container[data-hallman-workflow="ready"] { background:var(--kb-ready-bg) !important; border-color:var(--kb-ready) !important; }
+body:has(#task-summary) #task-summary .task-summary-container[data-hallman-workflow="progress"] { background:var(--kb-progress-bg) !important; border-color:var(--kb-progress) !important; }
+body:has(#task-summary) #task-summary .task-summary-container[data-hallman-workflow="blocked"] { background:var(--kb-blocked-bg) !important; border-color:var(--kb-blocked) !important; }
+body:has(#task-summary) #task-summary .task-summary-container[data-hallman-workflow="done"] { background:var(--kb-done-bg) !important; border-color:var(--kb-done) !important; }
