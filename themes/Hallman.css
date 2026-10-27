@@ -290,3 +290,181 @@ body:has(#task-summary a[href*="task_id=102"]) #task-summary .task-summary-conta
 body:has(#task-summary a[href*="task_id=102"]) #task-summary .task-summary-container span {
   color: inherit;
 }
+
+
+/* Modern task detail pages: quiet surfaces, clear hierarchy, and consistent spacing. */
+#task-summary > h2 {
+  font-size: 1.55rem !important;
+  line-height: 1.3 !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.025em !important;
+  margin: 0 0 14px !important;
+  color: var(--kb-text) !important;
+}
+#task-summary .task-summary-container {
+  border: 1px solid var(--kb-border) !important;
+  border-radius: 10px !important;
+  padding: 16px 18px !important;
+  box-shadow: 0 1px 2px rgba(20, 30, 45, .035);
+  margin-bottom: 20px !important;
+}
+#task-summary .task-summary-columns {
+  gap: 12px 20px !important;
+}
+#task-summary .task-summary-column ul {
+  margin: 0 !important;
+}
+#task-summary .task-summary-column li {
+  padding: 4px 0 !important;
+  line-height: 1.45 !important;
+}
+#task-summary .task-summary-column strong {
+  color: #66717e !important;
+  font-weight: 600 !important;
+}
+#task-summary .task-tags {
+  margin-top: 12px !important;
+}
+
+/* Description, subtasks, links, attachments, and comments use a consistent panel style. */
+#task-summary ~ details.accordion-section,
+details.accordion-section {
+  display: block;
+  margin: 12px 0 !important;
+  border: 1px solid var(--kb-border) !important;
+  border-radius: 10px !important;
+  background: var(--kb-surface) !important;
+  overflow: clip;
+  box-shadow: 0 1px 2px rgba(20, 30, 45, .025);
+}
+details.accordion-section > summary.accordion-title {
+  list-style: none;
+  cursor: pointer;
+  padding: 14px 16px !important;
+  background: #f8f9fb !important;
+  color: var(--kb-text) !important;
+  font-size: 0.98rem !important;
+  line-height: 1.4 !important;
+  font-weight: 700 !important;
+  border-bottom: 1px solid transparent;
+}
+details.accordion-section[open] > summary.accordion-title {
+  border-bottom-color: var(--kb-border) !important;
+}
+details.accordion-section > summary.accordion-title::-webkit-details-marker {
+  color: var(--kb-muted);
+}
+details.accordion-section > .accordion-content {
+  padding: 16px !important;
+  background: var(--kb-surface) !important;
+}
+details.accordion-section .markdown {
+  color: var(--kb-text);
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+details.accordion-section .markdown > :first-child { margin-top: 0 !important; }
+details.accordion-section .markdown > :last-child { margin-bottom: 0 !important; }
+details.accordion-section .markdown h1,
+details.accordion-section .markdown h2,
+details.accordion-section .markdown h3 {
+  letter-spacing: -0.015em;
+  line-height: 1.35;
+  margin-top: 1.2em;
+}
+details.accordion-section .markdown a {
+  color: #2563eb;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+/* Modernize the task navigation and actions area without removing functionality. */
+.sidebar.sidebar-icons {
+  border: 1px solid var(--kb-border) !important;
+  border-radius: 10px !important;
+  background: var(--kb-surface) !important;
+  padding: 8px !important;
+  box-shadow: 0 1px 3px rgba(20, 30, 45, .04);
+}
+.sidebar.sidebar-icons .sidebar-title {
+  padding: 10px 10px 6px !important;
+  margin: 0 !important;
+  border: 0 !important;
+}
+.sidebar.sidebar-icons .sidebar-title h2 {
+  font-size: .75rem !important;
+  line-height: 1.3 !important;
+  font-weight: 700 !important;
+  letter-spacing: .065em !important;
+  text-transform: uppercase !important;
+  color: #7b8490 !important;
+  margin: 0 !important;
+}
+.sidebar.sidebar-icons > ul {
+  margin: 0 0 8px !important;
+  padding: 0 !important;
+}
+.sidebar.sidebar-icons > ul > li {
+  margin: 2px 0 !important;
+  border-radius: 6px !important;
+}
+.sidebar.sidebar-icons > ul > li > a {
+  display: flex !important;
+  align-items: center !important;
+  gap: 9px !important;
+  padding: 8px 10px !important;
+  border-radius: 6px !important;
+  color: #4b5563 !important;
+  font-size: .9rem !important;
+  line-height: 1.35 !important;
+  text-decoration: none !important;
+}
+.sidebar.sidebar-icons > ul > li > a:hover {
+  background: #f1f4f8 !important;
+  color: #202833 !important;
+}
+.sidebar.sidebar-icons > ul > li.active,
+.sidebar.sidebar-icons > ul > li.active > a {
+  background: #edf3ff !important;
+  color: #2459a9 !important;
+  font-weight: 600 !important;
+}
+.sidebar.sidebar-icons > ul > li > a .fa {
+  width: 16px;
+  text-align: center;
+  color: #7b8490 !important;
+}
+.sidebar.sidebar-icons .sidebar-title + ul + .sidebar-title {
+  border-top: 1px solid var(--kb-border) !important;
+  margin-top: 8px !important;
+  padding-top: 14px !important;
+}
+
+/* Make task subtasks and comments calmer and easier to scan. */
+details.accordion-section table {
+  width: 100%;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+}
+details.accordion-section table th {
+  background: #f8f9fb !important;
+  color: #66717e !important;
+  font-size: .78rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+details.accordion-section table th,
+details.accordion-section table td {
+  padding: 9px 10px !important;
+  border-bottom: 1px solid #edf0f3 !important;
+}
+details.accordion-section table tr:last-child td {
+  border-bottom: 0 !important;
+}
+
+/* Keep the existing board-specific task #102 amber summary treatment intact. */
+body:has(a[href*="TaskViewController"][href*="task_id=102"]) #task-summary .task-summary-container {
+  background: var(--kb-progress-bg) !important;
+  border-color: var(--kb-progress) !important;
+}
