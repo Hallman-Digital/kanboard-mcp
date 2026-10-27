@@ -77,7 +77,7 @@
     if (attachmentSection && !attachmentSection.querySelector('.hallman-screenshot-action')) {
       const screenshot = Array.from(menu.querySelectorAll('li > a')).find(function (candidate) {
         const url = new URL(candidate.href, window.location.href);
-        return url.searchParams.get('controller') === 'TaskFileController'
+        return url.searchParams.get('controller') === 'TaskPopoverController'
           && url.searchParams.get('action') === 'screenshot';
       });
       if (screenshot) {
