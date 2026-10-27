@@ -1392,3 +1392,49 @@ details.accordion-section:has(> summary > .hallman-section-actions) > summary.ac
   background:#f1f4f8 !important; border:1px solid #d8dfe7 !important; color:#475569 !important;
   text-decoration:none !important;
 }
+
+
+/* Follow-up fixes from the live edit-modal review. */
+#modal-overlay #modal-content label.ui-helper-hidden-accessible,
+#modal-overlay #modal-content .ui-helper-hidden-accessible {
+  position:absolute !important; width:1px !important; height:1px !important;
+  padding:0 !important; margin:-1px !important; overflow:hidden !important;
+  clip:rect(0,0,0,0) !important; white-space:nowrap !important; border:0 !important;
+}
+#modal-overlay #modal-content .task-form-main-column label:not(.ui-helper-hidden-accessible),
+#modal-overlay #modal-content .task-form-secondary-column label:not(.ui-helper-hidden-accessible) {
+  display:block !important;
+}
+#modal-overlay #modal-content .hallman-task-relocated-fields {
+  display:grid !important; grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
+  gap:12px 14px !important; margin-top:14px !important; align-items:start !important;
+}
+#modal-overlay #modal-content .hallman-task-relocated-fields .hallman-task-field {
+  min-width:0 !important; margin:0 !important;
+}
+#modal-overlay #modal-content .hallman-task-relocated-fields label {
+  display:block !important; margin:0 0 5px !important;
+}
+#modal-overlay #modal-content .hallman-task-relocated-fields select,
+#modal-overlay #modal-content .hallman-task-relocated-fields input {
+  width:100% !important; max-width:100% !important; box-sizing:border-box !important;
+}
+#modal-overlay #modal-content .task-form-container > .task-form-secondary-column {
+  align-self:start !important; margin-top:0 !important; padding-top:0 !important;
+}
+#modal-overlay #modal-content .task-form-secondary-column > label {
+  margin-top:0 !important;
+}
+details.accordion-section:has(> .hallman-section-actions),
+details.accordion-section:has(> .hallman-section-action) { position:relative !important; }
+details.accordion-section > .hallman-section-actions,
+details.accordion-section > .hallman-section-action {
+  position:absolute !important; top:24px !important; right:10px !important; left:auto !important;
+  transform:none !important; margin:0 !important; z-index:12 !important;
+}
+details.accordion-section > .hallman-section-actions > .hallman-section-action {
+  position:static !important; transform:none !important;
+}
+details.accordion-section:has(> .hallman-section-actions) > summary.accordion-title {
+  padding-right:230px !important;
+}
