@@ -137,6 +137,29 @@
     panel.style.setProperty('background-color', workflow.bg, 'important');
     panel.style.setProperty('border-color', workflow.border, 'important');
   }
+  function normalizeAttachmentActions() {
+    const section = Array.from(document.querySelectorAll('details.accordion-section')).find(function (node) {
+      const summary = node.querySelector(':scope > summary.accordion-title');
+      return summary && summary.textContent.trim().toLowerCase().startsWith('attachments');
+    });
+    if (!section) return;
+    const summary = section.querySelector(':scope > summary.accordion-title');
+    let group = section.querySelector(':scope > .hallman-section-actions');
+    const standalone = section.querySelector(':scope > .hallman-section-action');
+    if (!group && standalone) {
+      group = document.createElement('div');
+      group.className = 'hallman-section-actions';
+      section.appendChild(group);
+      group.appendChild(standalone);
+    }
+    if (group && group.parentElement !== summary) {
+      summary.appendChild(group);
+    }
+    if (standalone && standalone.parentElement !== summary && standalone.parentElement !== group) {
+      summary.appendChild(standalone);
+    }
+  }
+
   function enhanceTaskEditModal() {
     const form = document.querySelector('#modal-overlay .task-form-container');
     if (!form || form.dataset.hallmanTaskLayout === 'v2') return;
@@ -149,7 +172,6 @@
     // Relocate assignee, category, and priority into a compact block below Tags.
     const fields = [
       { id: 'owner_id', key: 'assignee' },
-      { id: 'category_id', key: 'category' },
       { id: 'priority', key: 'priority' }
     ];
     const relocated = document.createElement('div');
@@ -199,5 +221,9 @@
     document.addEventListener('DOMContentLoaded', enhance, {once: true});
   } else enhance();
   document.addEventListener('kanboard:page:loaded', enhance);
+  if (document.body) {
+    const actionObserver = new MutationObserver(function () { normalizeAttachmentActions(); });
+    actionObserver.observe(document.body, {childList:true, subtree:true});
+  }
   if (document.body) watchTaskEditModal();
 })();
