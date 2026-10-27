@@ -1028,3 +1028,67 @@ details.accordion-section > .hallman-section-actions { display:flex !important; 
   #modal-overlay #modal-box:has(#form-title) #modal-content .form-columns { display:block !important; }
   #modal-overlay #modal-content { padding:0 16px 18px !important; }
 }
+
+
+/* Final overrides: loaded after earlier theme/plugin declarations. */
+details.accordion-section > .hallman-section-action,
+details.accordion-section > .hallman-section-actions {
+  top: 22px !important;
+  transform: translateY(-50%) !important;
+  margin-top: 0 !important;
+}
+details.accordion-section > .hallman-section-actions > .hallman-section-action {
+  top: auto !important;
+  transform: none !important;
+}
+#modal-overlay #modal-box {
+  width: min(800px, calc(100vw - 36px)) !important;
+  max-width: calc(100vw - 36px) !important;
+  box-sizing: border-box !important;
+}
+#modal-overlay #modal-box:has(input[name="title"]),
+#modal-overlay #modal-box:has(input#form-title),
+#modal-overlay #modal-box:has(textarea[name="description"]) {
+  width: min(1120px, calc(100vw - 36px)) !important;
+  max-width: calc(100vw - 36px) !important;
+}
+#modal-overlay #modal-header,
+#modal-overlay #modal-content .page-header,
+#modal-overlay #modal-content .page-header h2 {
+  border-top: 0 !important;
+  box-shadow: none !important;
+}
+#modal-overlay #modal-content .page-header {
+  border-bottom: 0 !important;
+  position: relative !important;
+}
+#modal-overlay #modal-content .page-header::before,
+#modal-overlay #modal-content .page-header::after,
+#modal-overlay #modal-content .page-header h2::before,
+#modal-overlay #modal-content .page-header h2::after {
+  content: none !important;
+  display: none !important;
+}
+#modal-overlay #modal-content .page-header h2 {
+  border-bottom: 1px solid #e7ebf0 !important;
+  padding-bottom: 12px !important;
+}
+#modal-overlay #modal-close-button {
+  top: 9px !important;
+  right: 12px !important;
+  width: 30px !important;
+  height: 30px !important;
+  line-height: 30px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 7px !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  background: #f1f4f8 !important;
+  color: #64748b !important;
+}
+#modal-overlay #modal-close-button .fa {
+  font-size: 14px !important;
+  line-height: 30px !important;
+}
