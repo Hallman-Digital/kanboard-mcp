@@ -107,26 +107,35 @@
   function colorTaskSummary() {
     const panel = document.querySelector('#task-summary .task-summary-container');
     if (!panel) return;
-    const row = Array.from(panel.querySelectorAll('.task-summary-column li')).find(function (li) {
-      const label = li.querySelector('strong');
-      return label && /^column\s*:/i.test(label.textContent.trim());
+
+    // Read the visible column label rather than relying on task IDs or task colors.
+    const rows = Array.from(panel.querySelectorAll('.task-summary-column li'));
+    const row = rows.find(function (li) {
+      return /^\\s*column\\s*:/i.test(li.textContent.trim());
     });
     if (!row) return;
-    const value = row.querySelector('span');
-    const name = (value ? value.textContent : row.textContent.replace(/^column\s*:/i, '')).trim().toLowerCase();
-    const mapping = {
-      'backlog': 'backlog',
-      'ready': 'ready',
-      'wip': 'progress',
-      'in-progress': 'progress',
-      'in progress': 'progress',
-      'blocked': 'blocked',
-      'done': 'done'
-    };
-    if (mapping[name]) panel.dataset.hallmanWorkflow = mapping[name];
-    else delete panel.dataset.hallmanWorkflow;
-  }
 
+    const name = row.textContent.replace(/^\\s*column\\s*:/i, '').trim().toLowerCase().replace(/\\s+/g, ' ');
+    const workflows = [
+      { names: ['backlog', 'to do', 'todo', 'new', 'open'], key: 'backlog', bg: '#EEF0F3', border: '#6B7280' },
+      { names: ['ready', 'queued', 'planned'], key: 'ready', bg: '#E8F1FF', border: '#3B82F6' },
+      { names: ['wip', 'in-progress', 'in progress', 'doing', 'working'], key: 'progress', bg: '#FFF3D9', border: '#F59E0B' },
+      { names: ['blocked', 'on hold', 'on-hold'], key: 'blocked', bg: '#FDE8E8', border: '#EF4444' },
+      { names: ['done', 'complete', 'completed', 'finished', 'closed'], key: 'done', bg: '#E2F7EF', border: '#10B981' }
+    ];
+    const workflow = workflows.find(function (item) { return item.names.includes(name); });
+
+    if (!workflow) {
+      delete panel.dataset.hallmanWorkflow;
+      panel.style.removeProperty('background-color');
+      panel.style.removeProperty('border-color');
+      return;
+    }
+
+    panel.dataset.hallmanWorkflow = workflow.key;
+    panel.style.setProperty('background-color', workflow.bg, 'important');
+    panel.style.setProperty('border-color', workflow.border, 'important');
+  }
   function enhance() {
     colorTaskSummary();
     enhanceTaskSidebar();
