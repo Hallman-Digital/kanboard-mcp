@@ -1,0 +1,14 @@
+/* Scoped to the task-sidebar Actions disclosure only. */
+.sidebar.sidebar-icons .hallman-actions-disclosure { position:relative; margin:10px 0 4px; border-top:1px solid #dfe3e8; padding-top:10px; }
+.sidebar.sidebar-icons .hallman-actions-trigger { display:flex; align-items:center; justify-content:space-between; border:1px solid #dfe3e8; border-radius:7px; background:#f8f9fb; color:#4b5563; cursor:pointer; font-size:13px; font-weight:700; padding:10px 12px; list-style:none; user-select:none; }
+.sidebar.sidebar-icons .hallman-actions-trigger::-webkit-details-marker { display:none; }
+.sidebar.sidebar-icons .hallman-actions-trigger::after { content:''; width:7px; height:7px; margin-right:2px; border-right:2px solid #7b8490; border-bottom:2px solid #7b8490; transform:rotate(45deg); transition:transform .12s ease; }
+.sidebar.sidebar-icons .hallman-actions-disclosure[open] > .hallman-actions-trigger::after { transform:rotate(225deg); }
+.sidebar.sidebar-icons .hallman-actions-trigger:hover { background:#f1f4f8; }
+.sidebar.sidebar-icons .hallman-actions-trigger:focus-visible { outline:2px solid #3b82f6; outline-offset:2px; }
+.sidebar.sidebar-icons .hallman-actions-disclosure > ul { margin:6px 0 0 !important; padding:3px 0 !important; max-height:min(62vh,510px); overflow-y:auto; border:1px solid #dfe3e8; border-radius:7px; background:white; }
+.sidebar.sidebar-icons .hallman-actions-disclosure > ul > li { margin:0 3px !important; }
+.sidebar.sidebar-icons .hallman-actions-disclosure > ul > li > a { display:flex; gap:9px; align-items:center; padding:8px 10px; color:#4b5563; text-decoration:none; border-radius:5px; }
+.sidebar.sidebar-icons .hallman-actions-disclosure > ul > li > a:hover { background:#f1f4f8; }
+.sidebar.sidebar-icons .hallman-actions-disclosure > ul > li:last-child > a { color:#b42318; }
+@media (prefers-reduced-motion:reduce) { .sidebar.sidebar-icons .hallman-actions-trigger::after {transition:none;} }
