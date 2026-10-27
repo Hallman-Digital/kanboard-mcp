@@ -1,0 +1,520 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
+
+/* Kanboard modernization: one coherent light theme, no legacy overrides. */
+:root {
+  --kb-text: #202833;
+  --kb-muted: #8a929b;
+  --kb-border: #dfe3e8;
+  --kb-canvas: #f6f7f9;
+  --kb-surface: #ffffff;
+  --kb-backlog: #6B7280;
+  --kb-backlog-bg: #EEF0F3;
+  --kb-ready: #3B82F6;
+  --kb-ready-bg: #E8F1FF;
+  --kb-progress: #F59E0B;
+  --kb-progress-bg: #FFF3D9;
+  --kb-blocked: #EF4444;
+  --kb-blocked-bg: #FDE8E8;
+  --kb-done: #10B981;
+  --kb-done-bg: #E2F7EF;
+}
+
+html, body, button, input, select, textarea, label {
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  color: var(--kb-text);
+}
+code, pre, kbd, samp {
+  font-family: ui-monospace, 'SFMono-Regular', Consolas, monospace !important;
+}
+html, body { background: var(--kb-canvas); }
+.btn, button, input, select, textarea, .form-control { border-radius: 6px; }
+
+/* Quiet, consistent workspace and column surfaces. */
+#board { background: transparent !important; }
+#board th.board-column-header {
+  background: #f8f9fb !important;
+  border-top: 1px solid #e6e9ee !important;
+  border-left: 1px solid #e6e9ee !important;
+  border-right: 1px solid #e6e9ee !important;
+  border-radius: 8px 8px 0 0;
+  padding: 10px 12px !important;
+}
+#board td.board-column {
+  background: transparent !important;
+  border-left: 1px solid #e7eaee !important;
+  border-right: 1px solid #e7eaee !important;
+}
+
+/* Option A workflow palette. IDs cover the board columns used across projects. */
+#board .task-board[data-column-id="26"], #board .task-board[data-column-id="11"], #board .task-board[data-column-id="21"], #board .task-board[data-column-id="6"], #board .task-board[data-column-id="16"], #board .task-board[data-column-id="1"] {
+  background: var(--kb-backlog-bg) !important; border: 1px solid var(--kb-backlog) !important;
+}
+#board th.board-column-header-26, #board th.board-column-header-11, #board th.board-column-header-21, #board th.board-column-header-6, #board th.board-column-header-16, #board th.board-column-header-1 { border-bottom: 3px solid var(--kb-backlog) !important; }
+
+#board .task-board[data-column-id="27"], #board .task-board[data-column-id="12"], #board .task-board[data-column-id="22"], #board .task-board[data-column-id="7"], #board .task-board[data-column-id="17"], #board .task-board[data-column-id="2"] {
+  background: var(--kb-ready-bg) !important; border: 1px solid var(--kb-ready) !important;
+}
+#board th.board-column-header-27, #board th.board-column-header-12, #board th.board-column-header-22, #board th.board-column-header-7, #board th.board-column-header-17, #board th.board-column-header-2 { border-bottom: 3px solid var(--kb-ready) !important; }
+
+#board .task-board[data-column-id="28"], #board .task-board[data-column-id="13"], #board .task-board[data-column-id="23"], #board .task-board[data-column-id="8"], #board .task-board[data-column-id="18"], #board .task-board[data-column-id="3"] {
+  background: var(--kb-progress-bg) !important; border: 1px solid var(--kb-progress) !important;
+}
+#board th.board-column-header-28, #board th.board-column-header-13, #board th.board-column-header-23, #board th.board-column-header-8, #board th.board-column-header-18, #board th.board-column-header-3 { border-bottom: 3px solid var(--kb-progress) !important; }
+
+#board .task-board[data-column-id="29"], #board .task-board[data-column-id="14"], #board .task-board[data-column-id="24"], #board .task-board[data-column-id="9"], #board .task-board[data-column-id="19"], #board .task-board[data-column-id="4"] {
+  background: var(--kb-blocked-bg) !important; border: 1px solid var(--kb-blocked) !important;
+}
+#board th.board-column-header-29, #board th.board-column-header-14, #board th.board-column-header-24, #board th.board-column-header-9, #board th.board-column-header-19, #board th.board-column-header-4 { border-bottom: 3px solid var(--kb-blocked) !important; }
+
+#board .task-board[data-column-id="30"], #board .task-board[data-column-id="15"], #board .task-board[data-column-id="25"], #board .task-board[data-column-id="10"], #board .task-board[data-column-id="20"], #board .task-board[data-column-id="5"] {
+  background: var(--kb-done-bg) !important; border: 1px solid var(--kb-done) !important;
+}
+#board th.board-column-header-30, #board th.board-column-header-15, #board th.board-column-header-25, #board th.board-column-header-10, #board th.board-column-header-20, #board th.board-column-header-5 { border-bottom: 3px solid var(--kb-done) !important; }
+
+/* Card shape, title hierarchy, and restrained hover feedback. */
+#board .task-board {
+  color: var(--kb-text);
+  border-radius: 8px !important;
+  padding: 8px !important;
+  margin: 6px 4px !important;
+  box-shadow: 0 1px 2px rgba(20, 30, 45, .04);
+  transition: box-shadow 120ms ease, transform 120ms ease;
+}
+#board .task-board:hover {
+  box-shadow: 0 3px 10px rgba(20, 30, 45, .09) !important;
+  transform: translateY(-1px);
+}
+#board .task-board .task-board-title {
+  color: var(--kb-text);
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  font-weight: 600;
+  line-height: 1.4;
+}
+@media (prefers-reduced-motion: reduce) {
+  #board .task-board { transition: none; }
+}
+
+/* SubtasksOnBoard: keep checklist rows clean, with no stray rule above the first item. */
+#board .task-board .table-suboncard {
+  margin-top: 5px !important;
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  background: transparent !important;
+}
+#board .task-board .table-suboncard td {
+  background: transparent !important;
+  border-color: rgba(40, 52, 68, .07) !important;
+  color: var(--kb-text);
+  vertical-align: top;
+}
+#board .task-board .table-suboncard .subtask-title a {
+  color: var(--kb-text);
+  text-decoration: none;
+}
+#board .task-board .table-suboncard input[type="checkbox"] {
+  margin: 2px 5px 0 0;
+  vertical-align: top;
+}
+
+/* Card content and footer controls: keep content first, metadata last. */
+#board .task-board .task-board-expanded {
+  display: flex !important;
+  flex-flow: row wrap !important;
+  align-items: center !important;
+  gap: 0 6px;
+}
+#board .task-board .task-board-expanded > .task-board-header,
+#board .task-board .task-board-expanded > .task-board-icons,
+#board .task-board .task-board-expanded .task-board-icons-row,
+#board .task-board .task-board-expanded > .task-board-header .dropdown {
+  display: contents !important;
+}
+
+/* Title and nested checklist each take a full row before the footer. */
+#board .task-board .task-board-expanded .task-board-title {
+  order: 1 !important;
+  flex: 0 0 100% !important;
+  width: 100% !important;
+}
+#board .task-board .task-board-expanded .table-suboncard {
+  order: 2 !important;
+  flex: 0 0 100% !important;
+  width: 100% !important;
+  margin-top: 5px !important;
+  border: 0 !important;
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+}
+#board .task-board .table-suboncard,
+#board .task-board .table-suboncard tbody,
+#board .task-board .table-suboncard tr,
+#board .task-board .table-suboncard td {
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Divider between checklist and compact metadata footer. */
+#board .task-board .task-board-expanded::after {
+  content: "";
+  order: 3 !important;
+  display: block;
+  flex: 0 0 100% !important;
+  width: 100%;
+  margin: 5px 0 4px;
+  border-top: 1px solid rgba(50, 60, 70, .08);
+}
+
+/* Footer order: ID, edit, progress, priority, then avatar at far right. */
+#board .task-board .task-board-header a.dropdown-menu-link-icon {
+  order: 4 !important;
+  color: var(--kb-muted) !important;
+  margin: 0 !important;
+}
+#board .task-board .task-board-header a.js-modal-large {
+  order: 5 !important;
+  color: var(--kb-muted) !important;
+  margin: 0 !important;
+}
+/* Move every footer icon out of the default leading position. */
+#board .task-board .task-board-icons a,
+#board .task-board .task-board-icons span {
+  order: 6 !important;
+  color: var(--kb-muted) !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+#board .task-board .task-board-icons .task-priority {
+  order: 7 !important;
+  color: var(--kb-muted) !important;
+}
+#board .task-board .task-board-header > .task-board-assignee { display: none !important; }
+#board .task-board .task-board-header .task-board-avatars {
+  order: 8 !important;
+  margin-left: auto !important;
+  margin-right: 0 !important;
+}
+
+/* Hide the description tooltip link by its icon and action URL. */
+#board .task-board .task-board-icons a[href*="description"],
+#board .task-board .task-board-icons a[href*="BoardTooltipController"][href*="description"],
+#board .task-board .task-board-icons a:has(i.fa-file-text-o),
+#board .task-board .task-board-icons a:has(i[class~="fa-file-text-o"]),
+#board .task-board .task-board-icons i.fa-file-text-o {
+  display: none !important;
+}
+
+/* All non-avatar metadata controls use one muted gray. */
+#board .task-board .task-board-header a,
+#board .task-board .task-board-header a *,
+#board .task-board .task-board-icons,
+#board .task-board .task-board-icons *,
+#board .task-board .task-priority {
+  color: var(--kb-muted) !important;
+}
+
+/* Keep task cards consistent and remove unused metadata from board view. */
+#board .task-board .task-icon-age,
+#board .task-board .task-board-reference,
+#board .task-board .task-icon-age-total,
+#board .task-board .task-icon-age-column {
+  display: none !important;
+}
+/* Reference remains stored on tasks; only its board badge is hidden. */
+form:has(#form-title) label[for="form-reference"],
+form:has(#form-title) #form-reference,
+form:has(#form-title) .form-reference {
+  display: none !important;
+}
+/* Hide task-color editing in task forms, without affecting tags/categories. */
+form:has(#form-title) label[for="form-color_id"],
+form:has(#form-title) #form-color_id,
+form:has(#form-title) .form-color_id {
+  display: none !important;
+}
+
+/* Final targeted fixes: preserve the avatar and suppress the description-tooltip icon. */
+#board .task-board .task-board-header > .task-board-assignee { display: none !important; }
+#board .task-board .task-board-header .task-board-avatars,
+#board .task-board .task-board-header .task-board-avatars .task-board-assignee,
+#board .task-board .task-board-header .task-board-avatars img { display: inline-flex !important; visibility: visible !important; opacity: 1 !important; }
+#board .task-board .task-board-icons a[href*="description"],
+#board .task-board .task-board-icons a:has(i.fa-file-text-o),
+#board .task-board .task-board-icons i.fa-file-text-o { display: none !important; }
+
+
+/* Unify footer metadata contrast with the task ID and edit control. */
+#board .task-board .task-board-header a.dropdown-menu-link-icon,
+#board .task-board .task-board-header a.js-modal-large,
+#board .task-board .task-board-icons,
+#board .task-board .task-board-icons-row,
+#board .task-board .task-board-icons-row a,
+#board .task-board .task-board-icons-row span,
+#board .task-board .task-board-icons-row i,
+#board .task-board .task-board-icons a *,
+#board .task-board .task-priority,
+#board .task-board .task-priority * {
+  color: #8a929b !important;
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+
+/* Subtasks are already visible on cards, so keep the percentage as a static indicator. */
+#board .task-board .task-board-icons .tooltip[data-href*="subtasks"] {
+  pointer-events: none !important;
+  cursor: default !important;
+}
+
+
+/* The subtask checklist is already visible on cards, so suppress its hover popup. */
+#board .task-board .task-board-icons-row span.tooltip:has(i.fa-bars) {
+  pointer-events: none !important;
+}
+#board .task-board .task-board-icons-row span.tooltip:has(i.fa-bars) > * {
+  pointer-events: none !important;
+}
+
+
+/* Task #102 detail summary matches its In-Progress board card color. */
+body:has(#task-summary a[href*="task_id=102"]) #task-summary .task-summary-container {
+  background: #FFF3D9 !important;
+  border: 1px solid #F59E0B !important;
+  border-radius: 8px !important;
+  color: #202833 !important;
+  padding: 12px !important;
+}
+body:has(#task-summary a[href*="task_id=102"]) #task-summary .task-summary-container strong,
+body:has(#task-summary a[href*="task_id=102"]) #task-summary .task-summary-container span {
+  color: inherit;
+}
+
+
+/* Modern task detail pages: quiet surfaces, clear hierarchy, and consistent spacing. */
+#task-summary > h2 {
+  font-size: 1.55rem !important;
+  line-height: 1.3 !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.025em !important;
+  margin: 0 0 14px !important;
+  color: var(--kb-text) !important;
+}
+#task-summary .task-summary-container {
+  border: 1px solid var(--kb-border) !important;
+  border-radius: 10px !important;
+  padding: 16px 18px !important;
+  box-shadow: 0 1px 2px rgba(20, 30, 45, .035);
+  margin-bottom: 20px !important;
+}
+#task-summary .task-summary-columns {
+  gap: 12px 20px !important;
+}
+#task-summary .task-summary-column ul {
+  margin: 0 !important;
+}
+#task-summary .task-summary-column li {
+  padding: 4px 0 !important;
+  line-height: 1.45 !important;
+}
+#task-summary .task-summary-column strong {
+  color: #66717e !important;
+  font-weight: 600 !important;
+}
+#task-summary .task-tags {
+  margin-top: 12px !important;
+}
+
+/* Description, subtasks, links, attachments, and comments use a consistent panel style. */
+#task-summary ~ details.accordion-section,
+details.accordion-section {
+  display: block;
+  margin: 12px 0 !important;
+  border: 1px solid var(--kb-border) !important;
+  border-radius: 10px !important;
+  background: var(--kb-surface) !important;
+  overflow: clip;
+  box-shadow: 0 1px 2px rgba(20, 30, 45, .025);
+}
+details.accordion-section > summary.accordion-title {
+  list-style: none;
+  cursor: pointer;
+  padding: 14px 16px !important;
+  background: #f8f9fb !important;
+  color: var(--kb-text) !important;
+  font-size: 0.98rem !important;
+  line-height: 1.4 !important;
+  font-weight: 700 !important;
+  border-bottom: 1px solid transparent;
+}
+details.accordion-section[open] > summary.accordion-title {
+  border-bottom-color: var(--kb-border) !important;
+}
+details.accordion-section > summary.accordion-title::-webkit-details-marker {
+  color: var(--kb-muted);
+}
+details.accordion-section > .accordion-content {
+  padding: 16px !important;
+  background: var(--kb-surface) !important;
+}
+details.accordion-section .markdown {
+  color: var(--kb-text);
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+details.accordion-section .markdown > :first-child { margin-top: 0 !important; }
+details.accordion-section .markdown > :last-child { margin-bottom: 0 !important; }
+details.accordion-section .markdown h1,
+details.accordion-section .markdown h2,
+details.accordion-section .markdown h3 {
+  letter-spacing: -0.015em;
+  line-height: 1.35;
+  margin-top: 1.2em;
+}
+details.accordion-section .markdown a {
+  color: #2563eb;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+/* Modernize the task navigation and actions area without removing functionality. */
+.sidebar.sidebar-icons {
+  border: 1px solid var(--kb-border) !important;
+  border-radius: 10px !important;
+  background: var(--kb-surface) !important;
+  padding: 8px !important;
+  box-shadow: 0 1px 3px rgba(20, 30, 45, .04);
+}
+.sidebar.sidebar-icons .sidebar-title {
+  padding: 10px 10px 6px !important;
+  margin: 0 !important;
+  border: 0 !important;
+}
+.sidebar.sidebar-icons .sidebar-title h2 {
+  font-size: .75rem !important;
+  line-height: 1.3 !important;
+  font-weight: 700 !important;
+  letter-spacing: .065em !important;
+  text-transform: uppercase !important;
+  color: #7b8490 !important;
+  margin: 0 !important;
+}
+.sidebar.sidebar-icons > ul {
+  margin: 0 0 8px !important;
+  padding: 0 !important;
+}
+.sidebar.sidebar-icons > ul > li {
+  margin: 2px 0 !important;
+  border-radius: 6px !important;
+}
+.sidebar.sidebar-icons > ul > li > a {
+  display: flex !important;
+  align-items: center !important;
+  gap: 9px !important;
+  padding: 8px 10px !important;
+  border-radius: 6px !important;
+  color: #4b5563 !important;
+  font-size: .9rem !important;
+  line-height: 1.35 !important;
+  text-decoration: none !important;
+}
+.sidebar.sidebar-icons > ul > li > a:hover {
+  background: #f1f4f8 !important;
+  color: #202833 !important;
+}
+.sidebar.sidebar-icons > ul > li.active,
+.sidebar.sidebar-icons > ul > li.active > a {
+  background: #edf3ff !important;
+  color: #2459a9 !important;
+  font-weight: 600 !important;
+}
+.sidebar.sidebar-icons > ul > li > a .fa {
+  width: 16px;
+  text-align: center;
+  color: #7b8490 !important;
+}
+.sidebar.sidebar-icons .sidebar-title + ul + .sidebar-title {
+  border-top: 1px solid var(--kb-border) !important;
+  margin-top: 8px !important;
+  padding-top: 14px !important;
+}
+
+/* Make task subtasks and comments calmer and easier to scan. */
+details.accordion-section table {
+  width: 100%;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+}
+details.accordion-section table th {
+  background: #f8f9fb !important;
+  color: #66717e !important;
+  font-size: .78rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+details.accordion-section table th,
+details.accordion-section table td {
+  padding: 9px 10px !important;
+  border-bottom: 1px solid #edf0f3 !important;
+}
+details.accordion-section table tr:last-child td {
+  border-bottom: 0 !important;
+}
+
+/* Keep the existing board-specific task #102 amber summary treatment intact. */
+body:has(a[href*="TaskViewController"][href*="task_id=102"]) #task-summary .task-summary-container {
+  background: var(--kb-progress-bg) !important;
+  border-color: var(--kb-progress) !important;
+}
+
+
+/* Accordion polish: remove the inset white strip and make disclosure state obvious. */
+details.accordion-section {
+  padding: 0 !important;
+  background: var(--kb-surface) !important;
+}
+details.accordion-section > summary.accordion-title {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  min-height: 50px;
+  margin: 0 !important;
+  padding: 14px 16px !important;
+  background: #f1f3f6 !important;
+  border: 0 !important;
+  border-radius: 9px 9px 0 0 !important;
+  list-style: none !important;
+}
+details.accordion-section:not([open]) > summary.accordion-title {
+  border-radius: 9px !important;
+}
+details.accordion-section > summary.accordion-title::before {
+  content: "";
+  display: inline-block;
+  flex: 0 0 8px;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid #7b8490;
+  border-bottom: 2px solid #7b8490;
+  transform: rotate(-45deg);
+  transform-origin: center;
+  transition: transform 140ms ease;
+  margin: 0 2px 0 1px;
+}
+details.accordion-section[open] > summary.accordion-title::before {
+  transform: rotate(45deg);
+  margin-top: -4px;
+}
+details.accordion-section > summary.accordion-title::-webkit-details-marker {
+  display: none !important;
+}
+details.accordion-section[open] > summary.accordion-title {
+  border-bottom: 1px solid var(--kb-border) !important;
+}
+details.accordion-section > .accordion-content {
+  margin: 0 !important;
+  border-radius: 0 0 9px 9px;
+}
