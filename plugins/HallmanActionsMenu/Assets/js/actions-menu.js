@@ -102,7 +102,33 @@
     }
   }
 
+
+  // The summary panel follows the task's real Kanboard column, not its task ID.
+  function colorTaskSummary() {
+    const panel = document.querySelector('#task-summary .task-summary-container');
+    if (!panel) return;
+    const row = Array.from(panel.querySelectorAll('.task-summary-column li')).find(function (li) {
+      const label = li.querySelector('strong');
+      return label && /^column\s*:/i.test(label.textContent.trim());
+    });
+    if (!row) return;
+    const value = row.querySelector('span');
+    const name = (value ? value.textContent : row.textContent.replace(/^column\s*:/i, '')).trim().toLowerCase();
+    const mapping = {
+      'backlog': 'backlog',
+      'ready': 'ready',
+      'wip': 'progress',
+      'in-progress': 'progress',
+      'in progress': 'progress',
+      'blocked': 'blocked',
+      'done': 'done'
+    };
+    if (mapping[name]) panel.dataset.hallmanWorkflow = mapping[name];
+    else delete panel.dataset.hallmanWorkflow;
+  }
+
   function enhance() {
+    colorTaskSummary();
     enhanceTaskSidebar();
     addSectionActions();
   }
