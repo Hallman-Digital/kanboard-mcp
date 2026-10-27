@@ -617,3 +617,158 @@ details.accordion-section > .accordion-content {
 .sidebar.sidebar-icons .hallman-actions-disclosure > ul > li::marker {
   content: "" !important;
 }
+
+
+/* Compact accordion headers and vertically centered section actions. */
+details.accordion-section > summary.accordion-title {
+  min-height: 42px !important;
+  padding: 9px 14px !important;
+  font-size: 0.91rem !important;
+  line-height: 1.35 !important;
+}
+details.accordion-section:has(> .hallman-section-action) > summary.accordion-title,
+details.accordion-section:has(> .hallman-section-actions) > summary.accordion-title {
+  padding-right: 230px !important;
+}
+details.accordion-section > .hallman-section-action,
+details.accordion-section > .hallman-section-actions {
+  position: absolute !important;
+  right: 10px !important;
+  top: 6px !important;
+  z-index: 2;
+}
+details.accordion-section > .hallman-section-actions {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+details.accordion-section > .hallman-section-action,
+details.accordion-section > .hallman-section-actions > .hallman-section-action {
+  min-height: 30px !important;
+  height: 30px !important;
+  padding: 4px 9px !important;
+  line-height: 20px !important;
+  font-size: 12px !important;
+  width: auto !important;
+  max-width: unset !important;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+details.accordion-section > .hallman-section-actions > .hallman-section-action {
+  position: static !important;
+}
+@media (max-width: 640px) {
+  details.accordion-section:has(> .hallman-section-action) > summary.accordion-title,
+  details.accordion-section:has(> .hallman-section-actions) > summary.accordion-title {
+    padding-right: 170px !important;
+  }
+  details.accordion-section > .hallman-section-action,
+  details.accordion-section > .hallman-section-actions {
+    right: 7px !important;
+  }
+  details.accordion-section > .hallman-section-action,
+  details.accordion-section > .hallman-section-actions > .hallman-section-action {
+    padding: 4px 6px !important;
+    font-size: 11px !important;
+  }
+}
+/* Modernize Kanboard's actual modal container and forms. */
+#modal-overlay #modal-box {
+  max-width: min(94vw, 760px) !important;
+  border-radius: 12px !important;
+  overflow: auto;
+  box-shadow: 0 20px 70px rgba(15,23,42,.25) !important;
+  background: #fff !important;
+}
+#modal-overlay #modal-content {
+  padding: 18px 22px 22px !important;
+  color: #202833 !important;
+}
+#modal-overlay #modal-content .page-header h2,
+#modal-overlay #modal-content h2 {
+  font-size: 1.18rem !important;
+  line-height: 1.35 !important;
+  letter-spacing: -.015em;
+  color: #202833 !important;
+}
+#modal-overlay #modal-content form {
+  max-width: 100% !important;
+}
+#modal-overlay #modal-content form label {
+  display: block;
+  margin: 10px 0 4px;
+  font-weight: 600;
+  font-size: 13px;
+  color: #566273;
+}
+#modal-overlay #modal-content input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]),
+#modal-overlay #modal-content select,
+#modal-overlay #modal-content textarea {
+  max-width: 100% !important;
+  border: 1px solid #cfd6df !important;
+  border-radius: 7px !important;
+  padding: 9px 10px !important;
+  background: #fff;
+  font: inherit;
+}
+#modal-overlay #modal-content textarea {
+  width: 100%;
+  min-height: 110px;
+}
+#modal-overlay #modal-content input:focus,
+#modal-overlay #modal-content textarea:focus,
+#modal-overlay #modal-content select:focus {
+  outline: 2px solid rgba(59,130,246,.3);
+  border-color: #3b82f6 !important;
+}
+#modal-overlay #modal-content button,
+#modal-overlay #modal-content input[type="submit"] {
+  border-radius: 7px !important;
+}
+#modal-overlay #modal-content .alert {
+  border-radius: 7px;
+}
+/* Comments: readable full-width editor, less utility clutter. */
+details.accordion-section .accordion-content.comments {
+  padding: 12px 16px 16px !important;
+}
+details.accordion-section .accordion-content.comments > .comment-sorting {
+  text-align: right;
+  padding: 0 0 10px;
+  margin: 0 0 12px;
+  border-bottom: 1px solid #edf0f3;
+}
+details.accordion-section .accordion-content.comments > .comment-sorting a {
+  color: #64748b;
+  font-size: 12px;
+}
+details.accordion-section .accordion-content.comments > .comment-sorting a[href*="CommentController"][href*="action=create"] {
+  display: none !important;
+}
+details.accordion-section .accordion-content.comments > form {
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+details.accordion-section .accordion-content.comments > form textarea {
+  display: block;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: 95px !important;
+  border-radius: 8px !important;
+  border: 1px solid #d8dfe7 !important;
+  background: #fff;
+  padding: 10px 12px !important;
+  font-size: 14px;
+  line-height: 1.5;
+}
+details.accordion-section .accordion-content.comments > form textarea:focus {
+  outline: 2px solid rgba(59,130,246,.22);
+  border-color: #3b82f6 !important;
+}
+details.accordion-section .accordion-content.comments > form select {
+  border: 1px solid #d8dfe7;
+  border-radius: 6px;
+  padding: 6px 8px;
+  background: #fff;
+}
