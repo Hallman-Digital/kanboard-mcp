@@ -88,7 +88,8 @@
           group = document.createElement('div');
           group.className = 'hallman-section-actions';
           if (actions) group.appendChild(actions);
-          attachmentSection.appendChild(group);
+          attachmentSection.querySelector(':scope > summary.accordion-title').appendChild(group);
+          group.addEventListener('click', function (event) { event.stopPropagation(); });
         }
         screenshot.classList.add('hallman-section-action', 'hallman-screenshot-action');
         screenshot.setAttribute('aria-label', 'Paste screenshot');
