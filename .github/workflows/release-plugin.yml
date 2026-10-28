@@ -7,6 +7,10 @@ on:
         description: "Release tag to publish (example: v1.2.0)"
         required: true
         default: "v1.2.2"
+  push:
+    tags:
+      - 'v*'
+
 permissions:
   contents: write
 
