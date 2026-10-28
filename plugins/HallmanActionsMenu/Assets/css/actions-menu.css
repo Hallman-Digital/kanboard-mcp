@@ -750,3 +750,66 @@ details.accordion-section > .hallman-section-actions > .hallman-section-action {
 details.accordion-section:has(> .hallman-section-actions) > summary.accordion-title {
   padding-right:230px !important;
 }
+
+
+/* Final header geometry: action controls are children of the summary, centered on its row. */
+details.accordion-section > summary.accordion-title {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  box-sizing: border-box !important;
+  min-height: 44px !important;
+  height: 44px !important;
+  padding: 0 14px !important;
+  line-height: 1.25 !important;
+}
+details.accordion-section > summary.accordion-title > .hallman-section-actions {
+  position: absolute !important;
+  top: 50% !important;
+  right: 10px !important;
+  left: auto !important;
+  transform: translateY(-50%) !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 6px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  height: auto !important;
+  z-index: 5 !important;
+}
+details.accordion-section > summary.accordion-title > .hallman-section-actions > .hallman-section-action {
+  position: static !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 0 0 auto !important;
+  box-sizing: border-box !important;
+  height: 30px !important;
+  min-height: 30px !important;
+  margin: 0 !important;
+  padding: 0 10px !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+details.accordion-section:has(> summary > .hallman-section-actions) > summary.accordion-title {
+  padding-right: 230px !important;
+}
+@media (max-width: 640px) {
+  details.accordion-section > summary.accordion-title {
+    height: auto !important;
+    min-height: 44px !important;
+    padding: 0 10px 42px !important;
+  }
+  details.accordion-section > summary.accordion-title > .hallman-section-actions {
+    top: auto !important;
+    right: 8px !important;
+    bottom: 6px !important;
+    transform: none !important;
+    gap: 4px !important;
+  }
+  details.accordion-section:has(> summary > .hallman-section-actions) > summary.accordion-title {
+    padding-right: 10px !important;
+  }
+}
