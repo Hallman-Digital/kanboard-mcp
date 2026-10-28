@@ -89,7 +89,7 @@
     if (attachmentSection && !attachmentSection.querySelector('.hallman-screenshot-action')) {
       const screenshot = Array.from(menu.querySelectorAll('li > a')).find(function (candidate) {
         const url = new URL(candidate.href, window.location.href);
-        return url.searchParams.get('controller') === 'TaskPopoverController'
+        return ['TaskFileController', 'TaskPopoverController'].includes(url.searchParams.get('controller'))
           && url.searchParams.get('action') === 'screenshot';
       });
       if (screenshot) {
@@ -124,11 +124,11 @@
     // Read the visible column label rather than relying on task IDs or task colors.
     const rows = Array.from(panel.querySelectorAll('.task-summary-column li'));
     const row = rows.find(function (li) {
-      return /^\\s*column\\s*:/i.test(li.textContent.trim());
+      return /^\s*column\s*:/i.test(li.textContent.trim());
     });
     if (!row) return;
 
-    const name = row.textContent.replace(/^\\s*column\\s*:/i, '').trim().toLowerCase().replace(/\\s+/g, ' ');
+    const name = row.textContent.replace(/^\s*column\s*:/i, '').trim().toLowerCase().replace(/\s+/g, ' ');
     const workflows = [
       { names: ['backlog', 'to do', 'todo', 'new', 'open'], key: 'backlog', bg: '#EEF0F3', border: '#6B7280' },
       { names: ['ready', 'queued', 'planned'], key: 'ready', bg: '#E8F1FF', border: '#3B82F6' },
@@ -173,7 +173,7 @@
 
   function enhanceTaskEditModal() {
     const form = document.querySelector('#modal-overlay .task-form-container');
-    if (!form || form.dataset.hallmanTaskLayout === 'v3') return;
+    if (!form || form.dataset.hallmanTaskLayout === 'v4') return;
     const main = form.querySelector('.task-form-main-column');
     if (!main) return;
     const tags = form.querySelector('#form-tags');
@@ -197,7 +197,7 @@
     if (relocated.children.length && tagsGroup) {
       tagsGroup.insertAdjacentElement('afterend', relocated);
     }
-    form.dataset.hallmanTaskLayout = 'v3';
+    form.dataset.hallmanTaskLayout = 'v4';
   }
 
   function watchTaskEditModal() {
